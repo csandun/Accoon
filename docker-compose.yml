@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  accoon.api:
+    image: ${DOCKER_REGISTRY-}accoonapi
+    build:
+      context: .
+      dockerfile: src/Services/AccoonApi/Accoon.Api/Dockerfile
+    ports:
+      - '4000:80'
