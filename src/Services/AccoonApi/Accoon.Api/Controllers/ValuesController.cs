@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Accoon.Api.Controllers
@@ -10,6 +11,14 @@ namespace Accoon.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IMapper _mapper;
+
+        public ValuesController(IMapper mapper)
+        {
+            this._mapper = mapper;
+        }
+
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
