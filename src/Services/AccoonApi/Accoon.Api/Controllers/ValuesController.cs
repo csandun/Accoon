@@ -21,6 +21,9 @@ namespace Accoon.Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
+            Console.WriteLine("aa");
+            Console.WriteLine("bb");
+            Console.WriteLine("cc");
             return "value";
         }
 
