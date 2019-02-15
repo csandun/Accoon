@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Accoon.BuildingBlocks.Common\Accoon.BuildingBlocks.Common.csproj" />
     <ProjectReference Include="..\Accoon.Api.DataServices.Entities\Accoon.Api.DataServices.Entities.csproj" />
-    <ProjectReference Include="..\Accoon.Api.DataServices.Interfaces\Accoon.Api.DataServices.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

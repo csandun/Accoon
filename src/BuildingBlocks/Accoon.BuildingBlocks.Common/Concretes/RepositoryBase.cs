@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Accoon.BuildingBlocks.Common.Concretes
 {
-    public abstract class AbpRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
+    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
        where TEntity : class, IEntity<TPrimaryKey>
     {     
 

@@ -20,12 +20,16 @@ namespace Accoon.Api
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
+                public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register main classes and interfaces
+
+
+
+
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
