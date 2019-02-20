@@ -12,9 +12,11 @@ namespace Accoon.BuildingBlocks.Common.Concretes
 {
     public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
        where TEntity : class, IEntity<TPrimaryKey>
-    {     
+    {
 
-        public abstract IQueryable<TEntity> GetAll();
+        public  IQueryable<TEntity> GetAll() {
+            return null;
+        }
 
         public virtual IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors)
         {
@@ -103,7 +105,9 @@ namespace Accoon.BuildingBlocks.Common.Concretes
             return Get(id);
         }
 
-        public abstract TEntity Insert(TEntity entity);
+        public TEntity Insert(TEntity entity) {
+            return null;
+        }
 
         public virtual Task<TEntity> InsertAsync(TEntity entity)
         {
@@ -144,7 +148,9 @@ namespace Accoon.BuildingBlocks.Common.Concretes
             return Task.FromResult(InsertOrUpdateAndGetId(entity));
         }
 
-        public abstract TEntity Update(TEntity entity);
+        public TEntity Update(TEntity entity) {
+            return null;
+        }
 
         public virtual Task<TEntity> UpdateAsync(TEntity entity)
         {
@@ -165,7 +171,8 @@ namespace Accoon.BuildingBlocks.Common.Concretes
             return entity;
         }
 
-        public abstract void Delete(TEntity entity);
+        public  void Delete(TEntity entity) {
+        }
 
         public virtual Task DeleteAsync(TEntity entity)
         {
@@ -173,7 +180,7 @@ namespace Accoon.BuildingBlocks.Common.Concretes
             return Task.FromResult(0);
         }
 
-        public abstract void Delete(TPrimaryKey id);
+        public void Delete(TPrimaryKey id) { }
 
         public virtual Task DeleteAsync(TPrimaryKey id)
         {

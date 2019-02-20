@@ -1,4 +1,4 @@
-﻿using Accoon.Api.DataServices.Entities.CusotomEntities;
+﻿using Accoon.Api.DataServices.Entities.CustomEntities;
 using System.Threading.Tasks;
 
 namespace Accoon.Api.DataServices.Interfaces.Repositories
