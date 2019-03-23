@@ -17,4 +17,5 @@ namespace Accoon.Api.DataServices.Entities
 }
 
 
-//Add-Migration NewMigration -Project Accoon.Api.DataServices.Entities -StartupProject Accoon.Api
+// Add-Migration NewMigration -Project Accoon.Api.DataServices.Entities -StartupProject Accoon.Api
+// update-database -verbose
