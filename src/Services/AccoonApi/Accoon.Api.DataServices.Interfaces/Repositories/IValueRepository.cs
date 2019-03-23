@@ -1,4 +1,4 @@
-﻿using Accoon.Api.DataServices.Entities.CusotomEntities;
+﻿using Accoon.Api.DataServices.Entities.CustomEntities;
 using Accoon.BuildingBlocks.Common.Interfaces;
 using System.Threading.Tasks;
 
