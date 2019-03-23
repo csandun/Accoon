@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Accoon.Api.BussinessServices.Concretes.Services
 {
-    public class ValueRepository : IValueService
+    public class ValueService : IValueService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IValueRepository _valueRepository;
 
-        public ValueRepository(IMapper mapper, IUnitOfWork unitOfWork, IValueRepository valueRepository)
+        public ValueService(IMapper mapper, IUnitOfWork unitOfWork, IValueRepository valueRepository)
         {
             this._mapper = mapper;
             this._unitOfWork = unitOfWork;

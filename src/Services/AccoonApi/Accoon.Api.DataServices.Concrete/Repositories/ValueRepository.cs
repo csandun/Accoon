@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Accoon.Api.DataServices.Concrete.Repositories
 {
-    public class   : RepositoryBase<AddressEntity, int>, IValueRepository
+    public class ValueRepository : RepositoryBase<AddressEntity, int>, IValueRepository
     {
         public Task<AddressEntity> TestValueMethod()
         {
