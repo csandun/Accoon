@@ -18,32 +18,42 @@ namespace Accoon.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-                public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Register main classes and interfaces
-
+            // register automapper
             services.AddAutoMapper();
+
+            // register mvc
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            // swagger document
+            // swagger 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
 
+            // register db context and migration assebly
             var connection = @"Server=(localdb)\mssqllocaldb;Database=AccoonDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AccoonDbContext>
                 (options => options.UseSqlServer(connection, x => x.MigrationsAssembly("Accoon.Api.DataServices.Entities")));
-        }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            // register base classes
+
+
+            // register repositories
+
+
+            // register services
+
+        }
+                
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -54,9 +64,9 @@ namespace Accoon.Api
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-               
 
             });
+
 
             if (env.IsDevelopment())
             {

@@ -3,17 +3,11 @@ using Accoon.Api.DataServices.Interfaces.Repositories;
 using Accoon.BuildingBlocks.Common.Concretes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Accoon.Api.DataServices.Concrete.Repositories
 {
-    public class   : RepositoryBase<AddressEntity, int>, IValueRepository
+    public class AddressRepository: RepositoryBase<AddressEntity, int>, IAddressRepository
     {
-        public Task<AddressEntity> TestValueMethod()
-        {
-            return Task.FromResult(new AddressEntity { Id = 10 });
-        }
     }
 }
