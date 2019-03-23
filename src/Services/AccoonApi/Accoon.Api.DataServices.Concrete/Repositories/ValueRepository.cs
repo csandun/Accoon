@@ -33,7 +33,7 @@ namespace Accoon.Api.DataServices.Concrete.Repositories
 
         public Task<ValueEntity> TestValueMethod()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new ValueEntity { Id = 10 });
         }
 
         public override ValueEntity Update(ValueEntity entity)

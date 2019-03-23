@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Accoon.Api.BussinessServices.Interfaces\Accoon.Api.BussinessServices.Interfaces.csproj" />
+    <ProjectReference Include="..\Accoon.Api.DataServices.Interfaces\Accoon.Api.DataServices.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>

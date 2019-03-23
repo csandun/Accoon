@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Accoon.Api.BussinessServices.Entities.EntityDTOs;
+using Accoon.Api.BussinessServices.Interfaces.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,19 +13,19 @@ namespace Accoon.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IMapper _mapper;
+        private readonly IValueService _valueService;
 
-        public ValuesController(IMapper mapper)
+        public ValuesController(IValueService valueService)
         {
-            this._mapper = mapper;
+            this._valueService = valueService;
         }
 
 
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ValueDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await this._valueService.TestValueServiceMethod();
         }
 
         // GET api/values/5

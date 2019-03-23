@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Accoon.BuildingBlocks.Common\Accoon.BuildingBlocks.Common.csproj" />
+    <ProjectReference Include="..\Accoon.Api.BussinessServices.Interfaces\Accoon.Api.BussinessServices.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
