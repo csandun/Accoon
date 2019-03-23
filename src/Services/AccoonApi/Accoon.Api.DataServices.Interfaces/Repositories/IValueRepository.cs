@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Accoon.Api.DataServices.Interfaces.Repositories
 {
-    public interface IValueRepository: IRepository<ValueEntity, int>
+    public interface IValueRepository: IRepository<AddressEntity, int>
     {
-        Task<ValueEntity> TestValueMethod();
+        Task<AddressEntity> TestValueMethod();
     }
 }

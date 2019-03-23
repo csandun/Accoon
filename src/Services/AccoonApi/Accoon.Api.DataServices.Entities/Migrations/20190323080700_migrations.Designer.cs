@@ -4,14 +4,16 @@ using Accoon.Api.DataServices.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Accoon.Api.DataServices.Entities.Migrations
 {
     [DbContext(typeof(AccoonDbContext))]
-    partial class AccoonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190323080700_migrations")]
+    partial class migrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,6 +51,8 @@ namespace Accoon.Api.DataServices.Entities.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Age");
+
+                    b.Property<int>("MyProperty");
 
                     b.Property<string>("Name");
 

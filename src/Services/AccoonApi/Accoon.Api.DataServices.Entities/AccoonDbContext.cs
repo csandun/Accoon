@@ -12,7 +12,8 @@ namespace Accoon.Api.DataServices.Entities
            : base(options)
         { }
 
-        public DbSet<ValueEntity> Values { get; set; }
+        public DbSet<AddressEntity> Addresses { get; set; }
+        public DbSet<CustomerEntity> Customers { get; set; }
     }
 }
 
