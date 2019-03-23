@@ -9,5 +9,10 @@ namespace Accoon.Api.DataServices.Concrete.Repositories
 {
     public class AddressRepository: RepositoryBase<AddressEntity, int>, IAddressRepository
     {
+
+        public AddressRepository()
+        {
+
+        }
     }
 }

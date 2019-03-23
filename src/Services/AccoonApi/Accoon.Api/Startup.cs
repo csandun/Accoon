@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Accoon.Api.BussinessServices.Concretes.Services;
+using Accoon.Api.BussinessServices.Interfaces.Services;
+using Accoon.Api.DataServices.Concrete.Repositories;
 using Accoon.Api.DataServices.Entities;
+using Accoon.Api.DataServices.Interfaces.Repositories;
+using Accoon.BuildingBlocks.Common.Concretes;
+using Accoon.BuildingBlocks.Common.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,13 +51,20 @@ namespace Accoon.Api
                 (options => options.UseSqlServer(connection, x => x.MigrationsAssembly("Accoon.Api.DataServices.Entities")));
 
             // register base classes
+            services.AddTransient<IService, ServiceBase>();
+            services.AddTransient(typeof(IRepository<,>), typeof(RepositoryBase<,>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 
             // register repositories
-
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<IValueRepository, ValueRepository>();
 
             // register services
-
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IValueService, ValueService>();
         }
                 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
