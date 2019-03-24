@@ -21,7 +21,7 @@ namespace Accoon.BuildingBlocks.Common.Concretes
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.dbContext.Dispose();
         }
     }
 }

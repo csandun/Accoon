@@ -11,19 +11,22 @@ using System.Threading.Tasks;
 
 namespace Accoon.BuildingBlocks.Common.Concretes
 {
-    public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IRepository<TDbContext, TEntity, TPrimaryKey>
+    public  class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IRepository<TDbContext, TEntity, TPrimaryKey>
        where TEntity : class, IEntity<TPrimaryKey> where TDbContext : DbContext
     {
 
         private readonly TDbContext _dbContext;
+        private readonly DbSet<TEntity> _dbSet;
 
         public RepositoryBase(TDbContext dbContext)
         {
             this._dbContext = dbContext;
+            this._dbSet = this._dbContext.Set<TEntity>();
         }
 
         public  IQueryable<TEntity> GetAll() {
-            return null;
+            var entityList = this._dbSet.AsQueryable();
+            return entityList;
         }
 
         public virtual IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors)

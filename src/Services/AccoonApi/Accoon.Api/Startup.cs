@@ -51,20 +51,20 @@ namespace Accoon.Api
                 (options => options.UseSqlServer(connection, x => x.MigrationsAssembly("Accoon.Api.DataServices.Entities")));
 
             // register base classes
-            //services.AddTransient<IService, ServiceBase>();
-            //services.AddTransient(typeof(IRepository<,>), typeof(RepositoryBase<,>));
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IService, ServiceBase>();
+            services.AddTransient(typeof(IRepository<,,>), typeof(RepositoryBase<,,>));
+            services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
 
-            //// register repositories
-            //services.AddTransient<ICustomerRepository, CustomerRepository>();
-            //services.AddTransient<IAddressRepository, AddressRepository>();
-            //services.AddTransient<IValueRepository, ValueRepository>();
+            // register repositories
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<IValueRepository, ValueRepository>();
 
-            //// register services
-            //services.AddTransient<ICustomerService, CustomerService>();
-            //services.AddTransient<IAddressService, AddressService>();
-            //services.AddTransient<IValueService, ValueService>();
+            // register services
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IValueService, ValueService>();
         }
                 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

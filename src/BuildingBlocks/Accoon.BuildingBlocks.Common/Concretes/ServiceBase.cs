@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Accoon.BuildingBlocks.Common.Interfaces
 {
-    public abstract class ServiceBase : IService
+    public class ServiceBase : IService
     {
     }
 }

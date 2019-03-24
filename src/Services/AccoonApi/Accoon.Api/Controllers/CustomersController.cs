@@ -21,6 +21,8 @@ namespace Accoon.Api.Controllers
             this.customerService = customerService;
         }
 
+        [Route("")]
+        [HttpGet]
         public List<CustomerDto> GetAll()
         {
             return this.customerService.GetAllCustomers();
