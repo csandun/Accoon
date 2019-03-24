@@ -1,6 +1,7 @@
 ﻿using Accoon.BuildingBlocks.Common.Entities;
 using Accoon.BuildingBlocks.Common.Exceptions;
 using Accoon.BuildingBlocks.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,16 @@ using System.Threading.Tasks;
 
 namespace Accoon.BuildingBlocks.Common.Concretes
 {
-    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
-       where TEntity : class, IEntity<TPrimaryKey>
+    public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IRepository<TDbContext, TEntity, TPrimaryKey>
+       where TEntity : class, IEntity<TPrimaryKey> where TDbContext : DbContext
     {
+
+        private readonly TDbContext _dbContext;
+
+        public RepositoryBase(TDbContext dbContext)
+        {
+            this._dbContext = dbContext;
+        }
 
         public  IQueryable<TEntity> GetAll() {
             return null;

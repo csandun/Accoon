@@ -1,5 +1,6 @@
 ﻿using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using Accoon.Api.BussinessServices.Interfaces.Services;
+using Accoon.Api.DataServices.Entities;
 using Accoon.Api.DataServices.Interfaces.Repositories;
 using Accoon.BuildingBlocks.Common.Interfaces;
 using AutoMapper;
@@ -13,10 +14,10 @@ namespace Accoon.Api.BussinessServices.Concretes.Services
     public class ValueService : IValueService
     {
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork<AccoonDbContext> _unitOfWork;
         private readonly IValueRepository _valueRepository;
 
-        public ValueService(IMapper mapper, IUnitOfWork unitOfWork, IValueRepository valueRepository)
+        public ValueService(IMapper mapper, IUnitOfWork<AccoonDbContext> unitOfWork, IValueRepository valueRepository)
         {
             this._mapper = mapper;
             this._unitOfWork = unitOfWork;

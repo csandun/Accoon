@@ -1,4 +1,5 @@
 ﻿using Accoon.BuildingBlocks.Common.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Accoon.BuildingBlocks.Common.Interfaces
     /// </summary>
     /// <typeparam name="TEntity">Main Entity type this repository works on</typeparam>
     /// <typeparam name="TPrimaryKey">Primary key type of the entity</typeparam>
-    public interface IRepository<TEntity, TPrimaryKey> : IRepository where TEntity : class, IEntity<TPrimaryKey>
+    public interface IRepository<TDbContext, TEntity, TPrimaryKey> : IRepository where TEntity : class, IEntity<TPrimaryKey> where TDbContext : DbContext
     {
         #region Select/Get/Query
 

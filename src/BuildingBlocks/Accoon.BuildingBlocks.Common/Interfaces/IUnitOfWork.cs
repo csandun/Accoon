@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Accoon.BuildingBlocks.Common.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork<TDbContext>: IDisposable where TDbContext : DbContext
     {
         /// <summary>
         /// Saves all pending changes

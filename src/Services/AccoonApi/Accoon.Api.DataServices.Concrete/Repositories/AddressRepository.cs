@@ -1,4 +1,5 @@
-﻿using Accoon.Api.DataServices.Entities.CustomEntities;
+﻿using Accoon.Api.DataServices.Entities;
+using Accoon.Api.DataServices.Entities.CustomEntities;
 using Accoon.Api.DataServices.Interfaces.Repositories;
 using Accoon.BuildingBlocks.Common.Concretes;
 using System;
@@ -7,12 +8,10 @@ using System.Text;
 
 namespace Accoon.Api.DataServices.Concrete.Repositories
 {
-    public class AddressRepository: RepositoryBase<AddressEntity, int>, IAddressRepository
+    public class AddressRepository : RepositoryBase<AccoonDbContext, AddressEntity, int>, IAddressRepository
     {
-
-        public AddressRepository()
+        public AddressRepository(AccoonDbContext dbContext) : base(dbContext)
         {
-
         }
     }
 }

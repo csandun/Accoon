@@ -1,4 +1,5 @@
-﻿using Accoon.Api.DataServices.Entities.CustomEntities;
+﻿using Accoon.Api.DataServices.Entities;
+using Accoon.Api.DataServices.Entities.CustomEntities;
 using Accoon.Api.DataServices.Interfaces.Repositories;
 using Accoon.BuildingBlocks.Common.Concretes;
 using System;
@@ -9,11 +10,15 @@ using System.Threading.Tasks;
 
 namespace Accoon.Api.DataServices.Concrete.Repositories
 {
-    public class ValueRepository : RepositoryBase<AddressEntity, int>, IValueRepository
+    public class ValueRepository : RepositoryBase<AccoonDbContext, AddressEntity, int>, IValueRepository
     {
+        public ValueRepository(AccoonDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public Task<AddressEntity> TestValueMethod()
         {
-            return Task.FromResult(new AddressEntity { Id = 10 });
+            throw new NotImplementedException();
         }
     }
 }
