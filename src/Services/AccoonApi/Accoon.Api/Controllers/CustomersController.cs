@@ -7,6 +7,7 @@ using Accoon.Api.BussinessServices.Interfaces.Services;
 using Accoon.BuildingBlocks.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Accoon.Api.Controllers
 {
@@ -15,16 +16,19 @@ namespace Accoon.Api.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ICustomerService customerService;
+        private readonly ILogger<CustomersController> logger;
 
-        public CustomersController(ICustomerService customerService)
+        public CustomersController(ICustomerService customerService, ILogger<CustomersController> logger)
         {
             this.customerService = customerService;
+            this.logger = logger;
         }
 
         [Route("")]
         [HttpGet]
         public List<CustomerDto> GetAll()
         {
+            this.logger.LogInformation("start");
             return this.customerService.GetAllCustomers();
         }
     }
