@@ -8,3 +8,10 @@ services:
       dockerfile: src/Services/AccoonApi/Accoon.Api/Dockerfile
     ports:
       - '4000:80'
+
+  webstatus:
+    image: ${DOCKER_REGISTRY-}webstatus
+    build:
+      context: .
+      dockerfile: src/Web/WebStatus/Dockerfile
+
