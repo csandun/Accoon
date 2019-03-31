@@ -14,3 +14,5 @@
  - [x] Swagger
  - [x] Serilog 
  - [ ] Circute breakers and retry patterns
+ - [ ] Unit testing
+ - [ ] Functional testing
