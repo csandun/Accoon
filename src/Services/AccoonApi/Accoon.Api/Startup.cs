@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Accoon.Api.BussinessServices.Concretes.Services;
 using Accoon.Api.BussinessServices.Interfaces.Services;
@@ -10,14 +11,18 @@ using Accoon.Api.DataServices.Interfaces.Repositories;
 using Accoon.BuildingBlocks.Common.Concretes;
 using Accoon.BuildingBlocks.Common.Interfaces;
 using AutoMapper;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -48,11 +53,12 @@ namespace Accoon.Api
             });
 
             // register db context and migration assebly
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=AccoonDatabase;Trusted_Connection=True;ConnectRetryCount=0";
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=AccoonDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AccoonDbContext>
-                (options => options.UseSqlServer(connection, x => x.MigrationsAssembly("Accoon.Api.DataServices.Entities")));
+                (options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly("Accoon.Api.DataServices.Entities")));
 
             // Register interfaces and classes 
+            // https://andrewlock.net/using-scrutor-to-automatically-register-your-services-with-the-asp-net-core-di-container/
             // register base classes
             services.AddTransient<IService, ServiceBase>();
             services.AddTransient(typeof(IRepository<,,>), typeof(RepositoryBase<,,>));
@@ -71,13 +77,26 @@ namespace Accoon.Api
             .AddClasses(classes => classes.InNamespaceOf<AddressService>().Where(c => c.Name.EndsWith("Service")))
             .AsImplementedInterfaces()
             .WithTransientLifetime());
-                    
 
+
+            // Health checkings 
+            // https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/monitor-app-health
+            services.AddHealthChecks()
+                .AddSqlServer(connectionString); // sql server health check
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            // healthcheck middleware
+            app.UseHealthChecks("/hc",
+                new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+
             // add serilog
+            // https://ondrejbalas.com/using-serilog-with-asp-net-core-2-0/
             loggerFactory.AddSerilog();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
