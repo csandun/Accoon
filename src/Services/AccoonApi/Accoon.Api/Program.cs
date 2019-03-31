@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Accoon.Api.DataServices.Entities;
+using Accoon.Api.Infastructure;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,12 +17,40 @@ namespace Accoon.Api
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            // get configurations
+            var configuration = GetConfiguration();
+
+            // get builded host
+            var host = BuildWebHost(configuration, args);
+
+            // run migrations using extension method
+            host.MigrateDbContext<AccoonDbContext>((context, services) =>
+            {
+            });
+
+            host.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseSerilog();
+        // get config settings and values
+        private static IConfiguration GetConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+            var config = builder.Build();
+            return builder.Build();
+        }
+
+        // get web host and build
+        private static IWebHost BuildWebHost(IConfiguration configuration, string[] args) =>
+              WebHost.CreateDefaultBuilder(args)
+                  .CaptureStartupErrors(false)
+                  .UseStartup<Startup>()
+                 .UseContentRoot(Directory.GetCurrentDirectory())
+                  .UseConfiguration(configuration)
+                 .Build();
+
     }
 }
+

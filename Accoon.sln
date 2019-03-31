@@ -30,11 +30,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{2700
 		.travis.yml = .travis.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accoon.Api.BussinessServices.Entities", "src\Services\AccoonApi\Accoon.Api.BussinessServices.Entities\Accoon.Api.BussinessServices.Entities.csproj", "{D09193A2-4F93-420F-AEB4-FAF7E1909803}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accoon.Api.BussinessServices.Entities", "src\Services\AccoonApi\Accoon.Api.BussinessServices.Entities\Accoon.Api.BussinessServices.Entities.csproj", "{D09193A2-4F93-420F-AEB4-FAF7E1909803}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accoon.Api.DataServices.Entities", "src\Services\AccoonApi\Accoon.Api.DataServices.Entities\Accoon.Api.DataServices.Entities.csproj", "{F66DD16D-FF18-43AE-96F0-446990CBC62C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accoon.Api.DataServices.Entities", "src\Services\AccoonApi\Accoon.Api.DataServices.Entities\Accoon.Api.DataServices.Entities.csproj", "{F66DD16D-FF18-43AE-96F0-446990CBC62C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accoon.Api.DataServices.Interfaces", "src\Services\AccoonApi\Accoon.Api.DataServices.Interfaces\Accoon.Api.DataServices.Interfaces.csproj", "{C5AD5EFD-CF10-4B0B-BD90-DB0EF8306F27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accoon.Api.DataServices.Interfaces", "src\Services\AccoonApi\Accoon.Api.DataServices.Interfaces\Accoon.Api.DataServices.Interfaces.csproj", "{C5AD5EFD-CF10-4B0B-BD90-DB0EF8306F27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accoon.BuildingBlocks.WebHosting", "src\BuildingBlocks\Accoon.BuildingBlocks.WebHosting\Accoon.BuildingBlocks.WebHosting.csproj", "{16814B3F-0EF5-4CC9-AB53-35FE73E9C6A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +80,10 @@ Global
 		{C5AD5EFD-CF10-4B0B-BD90-DB0EF8306F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5AD5EFD-CF10-4B0B-BD90-DB0EF8306F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5AD5EFD-CF10-4B0B-BD90-DB0EF8306F27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16814B3F-0EF5-4CC9-AB53-35FE73E9C6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16814B3F-0EF5-4CC9-AB53-35FE73E9C6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16814B3F-0EF5-4CC9-AB53-35FE73E9C6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16814B3F-0EF5-4CC9-AB53-35FE73E9C6A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 		{D09193A2-4F93-420F-AEB4-FAF7E1909803} = {B54EDADB-1358-45A8-BD13-A096EE06AF40}
 		{F66DD16D-FF18-43AE-96F0-446990CBC62C} = {B54EDADB-1358-45A8-BD13-A096EE06AF40}
 		{C5AD5EFD-CF10-4B0B-BD90-DB0EF8306F27} = {B54EDADB-1358-45A8-BD13-A096EE06AF40}
+		{16814B3F-0EF5-4CC9-AB53-35FE73E9C6A4} = {3F4D3454-1402-463F-9101-31A5B661A248}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCFA0C45-859D-404B-9B33-A36D1340E828}
