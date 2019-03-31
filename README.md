@@ -3,6 +3,7 @@
 ## Fetures
  - [x] Microservices 
  - [x] Docker Compose / File
+ - [ ] CI / CD
  - [x] Generic Unit of work
  - [x] Generic Repository Pattern
  - [ ] Generic Service classes
