@@ -48,27 +48,33 @@ namespace Accoon.Api
             });
 
             // register db context and migration assebly
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=AccoonDatabase3;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=AccoonDatabase;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AccoonDbContext>
                 (options => options.UseSqlServer(connection, x => x.MigrationsAssembly("Accoon.Api.DataServices.Entities")));
 
+            // Register interfaces and classes 
             // register base classes
             services.AddTransient<IService, ServiceBase>();
             services.AddTransient(typeof(IRepository<,,>), typeof(RepositoryBase<,,>));
             services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
-
             // register repositories
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-            services.AddTransient<IAddressRepository, AddressRepository>();
-            services.AddTransient<IValueRepository, ValueRepository>();
+            services.Scan(scan => scan
+            .FromAssembliesOf(typeof(AddressRepository))
+            .AddClasses(classes => classes.InExactNamespaceOf<AddressRepository>())
+            .AsImplementedInterfaces()
+            .WithTransientLifetime());
 
-            // register services
-            services.AddTransient<ICustomerService, CustomerService>();
-            services.AddTransient<IAddressService, AddressService>();
-            services.AddTransient<IValueService, ValueService>();
+            // services
+            services.Scan(scan => scan
+            .FromAssembliesOf(typeof(AddressService))
+            .AddClasses(classes => classes.InNamespaceOf<AddressService>().Where(c => c.Name.EndsWith("Service")))
+            .AsImplementedInterfaces()
+            .WithTransientLifetime());
+                    
+
         }
-                
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             // add serilog
