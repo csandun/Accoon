@@ -11,5 +11,5 @@
  - [x] Auto Database Migrations and seeding
  - [x] Health Check api / UI
  - [x] Swagger
- - [ ] Serilog 
+ - [x] Serilog 
  - [ ] Circute breakers and retry patterns
