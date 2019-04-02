@@ -49,6 +49,7 @@ namespace Accoon.Api
                   .UseStartup<Startup>()
                  .UseContentRoot(Directory.GetCurrentDirectory())
                   .UseConfiguration(configuration)
+                .UseSerilog()
                  .Build();
 
     }
