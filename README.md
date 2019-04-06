@@ -16,3 +16,5 @@
  - [ ] Circute breakers and retry patterns
  - [ ] Unit testing
  - [ ] Functional testing
+ - [x] Central Logging with SEQ
+ - [ ] Add CorerelationId and track request
