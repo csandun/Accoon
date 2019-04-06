@@ -70,17 +70,17 @@ namespace Accoon.Api
 
             // register repositories
             services.Scan(scan => scan
-            .FromAssembliesOf(typeof(AddressRepository))
-            .AddClasses(classes => classes.InExactNamespaceOf<AddressRepository>())
-            .AsImplementedInterfaces()
-            .WithTransientLifetime());
+                .FromAssembliesOf(typeof(AddressRepository))
+                .AddClasses(classes => classes.InExactNamespaceOf<AddressRepository>())
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
 
             // services
             services.Scan(scan => scan
-            .FromAssembliesOf(typeof(AddressService))
-            .AddClasses(classes => classes.InNamespaceOf<AddressService>().Where(c => c.Name.EndsWith("Service")))
-            .AsImplementedInterfaces()
-            .WithTransientLifetime());
+                .FromAssembliesOf(typeof(AddressService))
+                .AddClasses(classes => classes.InNamespaceOf<AddressService>().Where(c => c.Name.EndsWith("Service")))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
 
             // Health checkings 
             // https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/monitor-app-health
