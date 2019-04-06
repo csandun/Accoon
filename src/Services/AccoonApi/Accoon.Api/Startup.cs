@@ -34,7 +34,9 @@ namespace Accoon.Api
 
         public Startup(IConfiguration configuration)
         {
-            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
             Configuration = configuration;
         }
 
@@ -120,3 +122,7 @@ namespace Accoon.Api
         }
     }
 }
+
+
+// other 
+// seq dockerize = https://blog.datalust.co/docker-developer-preview-1/
