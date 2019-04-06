@@ -55,7 +55,7 @@ namespace Accoon.Api
             });
 
             // register db context and migration assebly
-            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=AccoonDatabase;Trusted_Connection=True;ConnectRetryCount=0";
+            var connectionString = Configuration["ConnectionString"].ToString();
             services.AddDbContext<AccoonDbContext>
                 (options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly("Accoon.Api.DataServices.Entities")));
 

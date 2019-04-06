@@ -1,27 +1,22 @@
 version: '3.4'
 
 services:
+  seq:
+    image: datalust/seq:latest
+
+  sql.data:
+    image: microsoft/mssql-server-linux:2017-latest
+
   accoon.api:
     image: ${DOCKER_REGISTRY-}accoonapi
     build:
       context: .
       dockerfile: src/Services/AccoonApi/Accoon.Api/Dockerfile
-    ports:
-      - '4000:80'
+    depends_on:
+      - sql.data
 
   webstatus:
     image: ${DOCKER_REGISTRY-}webstatus
     build:
       context: .
       dockerfile: src/Web/WebStatus/Dockerfile
-    ports:
-      - '4001:80'
-   
-  db:
-     image: "mcr.microsoft.com/mssql/server"
-     environment:
-        SA_PASSWORD: "Ringer#123"
-        ACCEPT_EULA: "Y"
-     ports:
-        - '8000:80'
-

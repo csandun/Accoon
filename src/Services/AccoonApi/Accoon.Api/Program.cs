@@ -24,9 +24,9 @@ namespace Accoon.Api
             var host = BuildWebHost(configuration, args);
 
             // run migrations using extension method
-            host.MigrateDbContext<AccoonDbContext>((context, services) =>
-            {
-            });
+            //host.MigrateDbContext<AccoonDbContext>((context, services) =>
+            //{
+            //});
 
             host.Run();
         }
