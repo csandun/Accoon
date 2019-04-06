@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using Accoon.Api.BussinessServices.Concretes.HttpClients;
 using Accoon.Api.BussinessServices.Concretes.Services;
+using Accoon.Api.BussinessServices.Interfaces.HttpClients;
 using Accoon.Api.BussinessServices.Interfaces.Services;
 using Accoon.Api.DataServices.Concrete.Repositories;
 using Accoon.Api.DataServices.Entities;
@@ -80,11 +82,20 @@ namespace Accoon.Api
             .AsImplementedInterfaces()
             .WithTransientLifetime());
 
-
             // Health checkings 
             // https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/monitor-app-health
             services.AddHealthChecks()
                 .AddSqlServer(connectionString); // sql server health check
+
+            // IHttpClientFactory
+            // https://www.stevejgordon.co.uk/introduction-to-httpclientfactory-aspnetcore
+            services.AddHttpClient<IGitHubClient, GithubClient>(client =>
+            {
+                client.BaseAddress = new Uri("https://api.github.com/");
+                client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
+                client.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactoryTesting");
+            });
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
