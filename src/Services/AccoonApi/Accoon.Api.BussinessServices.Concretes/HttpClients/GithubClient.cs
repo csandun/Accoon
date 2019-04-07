@@ -1,5 +1,4 @@
 ﻿using Accoon.Api.BussinessServices.Interfaces.HttpClients;
-using Accoon.Api.BussinessServices.Interfaces.HttpClients;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Accoon.Api.BussinessServices.Concretes.HttpClients;
@@ -25,6 +26,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Polly;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -89,12 +91,16 @@ namespace Accoon.Api
 
             // IHttpClientFactory
             // https://www.stevejgordon.co.uk/introduction-to-httpclientfactory-aspnetcore
+            var retryPolicy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10));
+
             services.AddHttpClient<IGitHubClient, GithubClient>(client =>
             {
                 client.BaseAddress = new Uri("https://api.github.com/");
                 client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
                 client.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactoryTesting");
-            });
+            }).AddPolicyHandler(retryPolicy);
+
+
 
         }
 
