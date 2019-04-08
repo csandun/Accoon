@@ -1,12 +1,8 @@
-language: csharp
-sudo: required
-mono: none
-dist: trusty
-dotnet: 2.2.100
-branches:
-    only:
-        - master
-notification:
-    email:
-        on_success: never
-        on_failure: always
+env:
+  - DOCKER_COMPOSE_VERSION=1.4.2
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
