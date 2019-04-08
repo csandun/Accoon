@@ -13,7 +13,7 @@
  - [x] Health Check api / UI
  - [x] Swagger
  - [x] Serilog 
- - [ ] Circute breakers and retry patterns with polly and IHTTPClientFactory
+ - [x] Circute breakers and retry patterns with polly and IHTTPClientFactory (Not adding to source)
  - [ ] Unit testing
  - [ ] Functional testing
  - [x] Central Logging with SEQ
