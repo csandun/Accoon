@@ -7,14 +7,6 @@ services:
   sql.data:
     image: microsoft/mssql-server-linux:2017-latest
 
-  accoon.api:
-    image: ${DOCKER_REGISTRY-}accoonapi
-    build:
-      context: .
-      dockerfile: src/Services/AccoonApi/Accoon.Api/Dockerfile
-    depends_on:
-      - sql.data
-
   webstatus:
     image: ${DOCKER_REGISTRY-}webstatus
     build:

@@ -13,13 +13,7 @@ services:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
     ports:
-      - "2001:1433"  
-
-  accoon.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "4000:80"
+      - "2001:1433" 
 
   webstatus:
     environment:
