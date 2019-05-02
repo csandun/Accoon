@@ -5,7 +5,7 @@
  - [x] Docker Compose / File
  - [ ] CI / CD
  - [x] Generic Unit of work
- - [x] Generic Repository Pattern
+ - [x] Generic Repository Pattern 
  - [ ] Generic Service classes
  - [x] Register DI Automatically
  - [x] Database First
@@ -19,6 +19,6 @@
  - [x] Central Logging with SEQ
  - [ ] Add CorerelationId and track request
  - [x] IHttpClientFacotry -  NameType 
- 
+ - [x] Automapper 8.0
  
 
