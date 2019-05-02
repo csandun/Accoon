@@ -27,7 +27,8 @@ namespace Accoon.Api.Controllers
 
         [Route("")]
         [HttpGet]
-        public IActionResult GetAll()
+        [ProducesResponseType(typeof(List<CustomerDto>),(int)HttpStatusCode.OK)]
+        public ActionResult<List<CustomerDto>> GetAll()
         {
             this.logger.LogInformation("start");
             var customerList = this.customerService.GetAllCustomers();
