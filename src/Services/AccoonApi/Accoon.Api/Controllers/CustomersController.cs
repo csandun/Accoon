@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using Accoon.Api.BussinessServices.Interfaces.Services;
@@ -26,10 +27,29 @@ namespace Accoon.Api.Controllers
 
         [Route("")]
         [HttpGet]
-        public List<CustomerDto> GetAll()
+        public IActionResult GetAll()
         {
             this.logger.LogInformation("start");
-            return this.customerService.GetAllCustomers();
+            var customerList = this.customerService.GetAllCustomers();
+            return Ok(customerList);
         }
+
+        [Route("")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public async Task<IActionResult> Save([FromBody] CustomerDto customerDto)
+        {
+            var id = await this.customerService.SaveCustomerAsync(customerDto);
+            return CreatedAtAction(nameof(GetById), new { id = id }, null);
+        }
+
+        [Route("{id:long}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(CustomerDto), (int)HttpStatusCode.OK)]
+        public ActionResult<CustomerDto> GetById([FromRoute] long id)
+        {
+            return new CustomerDto();
+        }
+
     }
 }

@@ -6,17 +6,18 @@ using System.Text;
 
 namespace Accoon.BuildingBlocks.Common.Concretes
 {
-    public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext: DbContext
+    public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext : DbContext
     {
         private readonly TDbContext dbContext;
-        public UnitOfWork(TDbContext context )
+        public UnitOfWork(TDbContext context)
         {
             this.dbContext = context;
         }
 
         public int Commit()
         {
-            throw new NotImplementedException();
+            this.dbContext.SaveChanges();
+            return 1;
         }
 
         public void Dispose()

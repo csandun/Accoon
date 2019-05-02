@@ -117,12 +117,14 @@ namespace Accoon.BuildingBlocks.Common.Concretes
         }
 
         public TEntity Insert(TEntity entity) {
-            return null;
+            var a =   this._dbSet.Add(entity);
+            return a.Entity;
         }
 
-        public virtual Task<TEntity> InsertAsync(TEntity entity)
+        public async virtual Task<TEntity> InsertAsync(TEntity entity)
         {
-            return Task.FromResult(Insert(entity));
+            var a = await this._dbSet.AddAsync(entity);
+            return a.Entity;
         }
 
         public virtual TPrimaryKey InsertAndGetId(TEntity entity)

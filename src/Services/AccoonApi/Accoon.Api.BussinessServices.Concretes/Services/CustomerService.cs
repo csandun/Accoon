@@ -8,6 +8,8 @@ using System.Text;
 using Accoon.Api.DataServices.Entities;
 using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using System.Linq;
+using Accoon.Api.DataServices.Entities.CustomEntities;
+using System.Threading.Tasks;
 
 namespace Accoon.Api.BussinessServices.Concretes.Services
 {
@@ -31,5 +33,20 @@ namespace Accoon.Api.BussinessServices.Concretes.Services
             return result;
         }
 
+        public long SaveCustomer(CustomerDto customer) 
+        {
+            var customerEntity = this._mapper.Map<CustomerEntity>(customer);
+            var newCustomer = this._customerRepository.Insert(customerEntity);
+            this._unitOfWork.Commit();
+            return newCustomer.Id; 
+        }
+
+        public async Task<long> SaveCustomerAsync(CustomerDto customer)
+        {
+            var customerEntity = this._mapper.Map<CustomerEntity>(customer);
+            var newCustomer = await this._customerRepository.InsertAsync(customerEntity);
+            this._unitOfWork.Commit();
+            return newCustomer.Id;
+        }
     }
 }

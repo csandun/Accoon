@@ -5,10 +5,12 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using Accoon.Api.BussinessServices.Concretes.HttpClients;
 using Accoon.Api.BussinessServices.Concretes.Services;
+using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using Accoon.Api.BussinessServices.Interfaces.HttpClients;
 using Accoon.Api.BussinessServices.Interfaces.Services;
 using Accoon.Api.DataServices.Concrete.Repositories;
 using Accoon.Api.DataServices.Entities;
+using Accoon.Api.DataServices.Entities.CustomEntities;
 using Accoon.Api.DataServices.Interfaces.Repositories;
 using Accoon.BuildingBlocks.Common.Concretes;
 using Accoon.BuildingBlocks.Common.Interfaces;
@@ -46,7 +48,7 @@ namespace Accoon.Api
         {
             // register automapper
             services.AddAutoMapper();
-
+            
             // register mvc
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
