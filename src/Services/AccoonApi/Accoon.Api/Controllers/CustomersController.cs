@@ -37,9 +37,11 @@ namespace Accoon.Api.Controllers
 
         [Route("")]
         [HttpPost]
-        [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Save([FromBody] CustomerDto customerDto)
-        {
+        {  
             var id = await this.customerService.SaveCustomerAsync(customerDto);
             return CreatedAtAction(nameof(GetById), new { id = id }, null);
         }

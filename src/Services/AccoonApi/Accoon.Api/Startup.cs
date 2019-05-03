@@ -12,6 +12,7 @@ using Accoon.Api.DataServices.Concrete.Repositories;
 using Accoon.Api.DataServices.Entities;
 using Accoon.Api.DataServices.Entities.CustomEntities;
 using Accoon.Api.DataServices.Interfaces.Repositories;
+using Accoon.Api.Middlewares;
 using Accoon.BuildingBlocks.Common.Concretes;
 using Accoon.BuildingBlocks.Common.Interfaces;
 using AutoMapper;
@@ -122,7 +123,6 @@ namespace Accoon.Api
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-
             });
 
 
@@ -130,6 +130,10 @@ namespace Accoon.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // handle error handling globaly using middleware
+            // https://www.strathweb.com/2018/07/centralized-exception-handling-and-request-validation-in-asp-net-core/
+            app.ConfigureExceptionHandler(env);
 
             app.UseMvc();
         }
