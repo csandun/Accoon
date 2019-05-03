@@ -15,5 +15,9 @@ namespace Accoon.Api.BussinessServices.Entities.EntityDTOs
 
         [Required]
         public int Age { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
     }
 }

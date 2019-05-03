@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using Accoon.Api.BussinessServices.Concretes.HttpClients;
+﻿using Accoon.Api.BussinessServices.Concretes.HttpClients;
 using Accoon.Api.BussinessServices.Concretes.Services;
-using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using Accoon.Api.BussinessServices.Interfaces.HttpClients;
-using Accoon.Api.BussinessServices.Interfaces.Services;
 using Accoon.Api.DataServices.Concrete.Repositories;
 using Accoon.Api.DataServices.Entities;
-using Accoon.Api.DataServices.Entities.CustomEntities;
-using Accoon.Api.DataServices.Interfaces.Repositories;
+using Accoon.Api.Infastructure;
 using Accoon.Api.Middlewares;
 using Accoon.BuildingBlocks.Common.Concretes;
 using Accoon.BuildingBlocks.Common.Interfaces;
@@ -20,16 +12,15 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Linq;
 
 namespace Accoon.Api
 {
@@ -49,9 +40,19 @@ namespace Accoon.Api
         {
             // register automapper
             services.AddAutoMapper();
-            
+
             // register mvc
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.InvalidModelStateResponseFactory = context =>
+                    {
+                        var problems = new CustomBadRequest(context);
+                        return new BadRequestObjectResult(problems);
+                    };
+
+                    options.ClientErrorMapping[404] = new ClientErrorData() { Link = "", Title = "Not found resources" };
+                });
 
             // swagger 
             services.AddSwaggerGen(c =>
@@ -98,7 +99,6 @@ namespace Accoon.Api
                 client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
                 client.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactoryTesting");
             });
-
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
