@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace Accoon.Api.Middlewares
                         problemDetails.Status = StatusCodes.Status500InternalServerError;
                         problemDetails.Detail = exception.Message.ToString();
                     }
-
+                    
                     problemDetails.Extensions["traceId"] = context.Request.HttpContext.TraceIdentifier;
                     if (env.IsDevelopment())
                     {

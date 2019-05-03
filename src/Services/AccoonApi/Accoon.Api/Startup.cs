@@ -143,3 +143,11 @@ namespace Accoon.Api
 
 // other 
 // seq dockerize = https://blog.datalust.co/docker-developer-preview-1/
+
+
+// 5-4 todo
+// user profile, ExceptionMiddlewareExtensions, CustomBadRequest move to commonlib
+// log exception to middleware
+//
+//
+//
