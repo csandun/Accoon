@@ -20,5 +20,5 @@
  - [ ] Add CorerelationId and track request
  - [x] IHttpClientFacotry -  NameType 
  - [x] Automapper 8.0
- 
+ - [x] Customizing automatic HTTP 400 error response and Customizing automatic 500 error response using middleware
 
