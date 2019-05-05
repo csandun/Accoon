@@ -10,6 +10,7 @@ using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using System.Linq;
 using Accoon.Api.DataServices.Entities.CustomEntities;
 using System.Threading.Tasks;
+using Accoon.BuildingBlocks.Common.Pagination;
 
 namespace Accoon.Api.BussinessServices.Concretes.Services
 {
@@ -26,11 +27,18 @@ namespace Accoon.Api.BussinessServices.Concretes.Services
             this._customerRepository = customerRepository;
         }
 
-        public List<CustomerDto> GetAllCustomers()
+        public List<CustomerDto> GetCustomers()
         {
             var customers = this._customerRepository.GetAll().ToList();
             var result = this._mapper.Map<List<CustomerDto>>(customers);
             return result;
+        }
+
+        public async Task<CustomerDto> GetCustomerByIdAsync(long id)
+        {
+            var customerEntity = await this._customerRepository.GetAsync(id);
+            var customerDto = this._mapper.Map<CustomerDto>(customerEntity);
+            return customerDto;
         }
 
         public long SaveCustomer(CustomerDto customer) 
@@ -47,6 +55,13 @@ namespace Accoon.Api.BussinessServices.Concretes.Services
             var newCustomer = await this._customerRepository.InsertAsync(customerEntity);
             this._unitOfWork.Commit();
             return newCustomer.Id;
+        }
+
+        public PaginationDto<CustomerDto> GetCustomers(int page, int size)
+        {
+            var customerPagenation = this._customerRepository.GetPaginationAsync(page, size);
+            var pagination = this._mapper.Map<PaginationDto<CustomerDto>>(customerPagenation);
+            return pagination;
         }
     }
 }

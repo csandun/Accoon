@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using Accoon.Api.BussinessServices.Interfaces.Services;
 using Accoon.BuildingBlocks.Common.Interfaces;
+using Accoon.BuildingBlocks.Common.Pagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ namespace Accoon.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public class CustomersController : ControllerBase
     {
         private readonly ICustomerService customerService;
@@ -27,19 +29,17 @@ namespace Accoon.Api.Controllers
 
         [Route("")]
         [HttpGet]
-        [ProducesResponseType(typeof(List<CustomerDto>),(int)HttpStatusCode.OK)]
-        public ActionResult<List<CustomerDto>> GetAll()
-        {
-            this.logger.LogInformation("start");
-            var customerList = this.customerService.GetAllCustomers();
-            return Ok(customerList);
+        [ProducesResponseType(typeof(PaginationDto<CustomerDto>), StatusCodes.Status200OK)]
+        public ActionResult<PaginationDto<CustomerDto>> GetAll([FromQuery] int page = 1, [FromQuery] int size = 5)
+        {            
+            var paginationDto = this.customerService.GetCustomers(page, size);
+            return Ok(paginationDto);
         }
 
         [Route("")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Save([FromBody] CustomerDto customerDto)
         {  
             var id = await this.customerService.SaveCustomerAsync(customerDto);
@@ -48,11 +48,17 @@ namespace Accoon.Api.Controllers
 
         [Route("{id:long}")]
         [HttpGet]
-        [ProducesResponseType(typeof(CustomerDto), (int)HttpStatusCode.OK)]
-        public ActionResult<CustomerDto> GetById([FromRoute] long id)
+        [ProducesResponseType(typeof(CustomerDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<CustomerDto>> GetById([FromRoute] long id)
         {
-            return new CustomerDto();
-        }
+            var customer = await this.customerService.GetCustomerByIdAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
 
+            return customer;
+        }
     }
 }

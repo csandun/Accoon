@@ -1,18 +1,20 @@
 ﻿using Accoon.BuildingBlocks.Common.Entities;
 using Accoon.BuildingBlocks.Common.Exceptions;
 using Accoon.BuildingBlocks.Common.Interfaces;
+using Accoon.BuildingBlocks.Common.Pagination;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Accoon.BuildingBlocks.Common.Concretes
 {
-    public  class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IRepository<TDbContext, TEntity, TPrimaryKey>
-       where TEntity : class, IEntity<TPrimaryKey> where TDbContext : DbContext
+    public class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IRepository<TDbContext, TEntity, TPrimaryKey>
+        where TDbContext : DbContext
+        where TEntity : Entity<TPrimaryKey>
+//        where TPrimaryKey : struct
     {
 
         private readonly TDbContext _dbContext;
@@ -24,7 +26,8 @@ namespace Accoon.BuildingBlocks.Common.Concretes
             this._dbSet = this._dbContext.Set<TEntity>();
         }
 
-        public  IQueryable<TEntity> GetAll() {
+        public IQueryable<TEntity> GetAll()
+        {
             var entityList = this._dbSet.AsQueryable();
             return entityList;
         }
@@ -73,11 +76,6 @@ namespace Accoon.BuildingBlocks.Common.Concretes
         public virtual async Task<TEntity> GetAsync(TPrimaryKey id)
         {
             var entity = await FirstOrDefaultAsync(id);
-            if (entity == null)
-            {
-                throw new EntityNotFoundException(typeof(TEntity), id);
-            }
-
             return entity;
         }
 
@@ -116,12 +114,13 @@ namespace Accoon.BuildingBlocks.Common.Concretes
             return Get(id);
         }
 
-        public TEntity Insert(TEntity entity) {
-            var a =   this._dbSet.Add(entity);
+        public TEntity Insert(TEntity entity)
+        {
+            var a = this._dbSet.Add(entity);
             return a.Entity;
         }
 
-        public async virtual Task<TEntity> InsertAsync(TEntity entity)
+        public virtual async Task<TEntity> InsertAsync(TEntity entity)
         {
             var a = await this._dbSet.AddAsync(entity);
             return a.Entity;
@@ -161,7 +160,8 @@ namespace Accoon.BuildingBlocks.Common.Concretes
             return Task.FromResult(InsertOrUpdateAndGetId(entity));
         }
 
-        public TEntity Update(TEntity entity) {
+        public TEntity Update(TEntity entity)
+        {
             return null;
         }
 
@@ -184,7 +184,8 @@ namespace Accoon.BuildingBlocks.Common.Concretes
             return entity;
         }
 
-        public  void Delete(TEntity entity) {
+        public void Delete(TEntity entity)
+        {
         }
 
         public virtual Task DeleteAsync(TEntity entity)
@@ -265,6 +266,12 @@ namespace Accoon.BuildingBlocks.Common.Concretes
                 );
 
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
+        }
+
+        public virtual PaginationModel<TEntity, TPrimaryKey> GetPaginationAsync(int page = 1, int size = 10)
+        {
+            var resultList = this._dbSet.Skip((page - 1) * size).Take(size).AsQueryable();
+            return new PaginationModel<TEntity, TPrimaryKey>(page, size, this._dbSet.Count(), resultList);
         }
     }
 }

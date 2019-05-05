@@ -1,5 +1,6 @@
 ﻿using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using Accoon.Api.DataServices.Entities.CustomEntities;
+using Accoon.BuildingBlocks.Common.Pagination;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Accoon.Api
         {
             CreateMap<CustomerDto, CustomerEntity>();
             CreateMap<CustomerEntity, CustomerDto>();
+            CreateMap< PaginationModel<CustomerEntity, long>, PaginationDto<CustomerDto>>();
         }
     }
 }

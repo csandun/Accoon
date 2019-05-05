@@ -1,4 +1,5 @@
 ﻿using Accoon.BuildingBlocks.Common.Entities;
+using Accoon.BuildingBlocks.Common.Pagination;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,9 @@ namespace Accoon.BuildingBlocks.Common.Interfaces
     /// </summary>
     /// <typeparam name="TEntity">Main Entity type this repository works on</typeparam>
     /// <typeparam name="TPrimaryKey">Primary key type of the entity</typeparam>
-    public interface IRepository<TDbContext, TEntity, TPrimaryKey> : IRepository where TEntity : class, IEntity<TPrimaryKey> where TDbContext : DbContext
+    public interface IRepository<TDbContext, TEntity, TPrimaryKey> : IRepository 
+        where TEntity : Entity<TPrimaryKey>
+        where TDbContext : DbContext
     {
         #region Select/Get/Query
 
@@ -332,5 +335,7 @@ namespace Accoon.BuildingBlocks.Common.Interfaces
         Task<long> LongCountAsync(Expression<Func<TEntity, bool>> predicate);
 
         #endregion
+
+        PaginationModel<TEntity, TPrimaryKey> GetPaginationAsync(int page = 1, int size = 10);
     }
 }
