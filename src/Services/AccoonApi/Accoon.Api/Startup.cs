@@ -21,6 +21,7 @@ using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace Accoon.Api
 {
@@ -99,6 +100,10 @@ namespace Accoon.Api
                 client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
                 client.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactoryTesting");
             });
+
+            services.AddMiniProfiler(options =>
+                  options.RouteBasePath = "/profiler"
+               );
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -115,6 +120,8 @@ namespace Accoon.Api
             // https://ondrejbalas.com/using-serilog-with-asp-net-core-2-0/
             loggerFactory.AddSerilog();
 
+            app.UseMiniProfiler();
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -123,6 +130,8 @@ namespace Accoon.Api
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.IndexStream = () => GetType().GetTypeInfo().Assembly.GetManifestResourceStream("Accoon.Api.Accoon.SwaggerIndex.html");
+
             });
 
 
@@ -134,6 +143,7 @@ namespace Accoon.Api
             // handle error handling globaly using middleware
             // https://www.strathweb.com/2018/07/centralized-exception-handling-and-request-validation-in-asp-net-core/
             app.ConfigureExceptionHandler(env);
+  
 
             app.UseMvc();
         }
