@@ -101,9 +101,12 @@ namespace Accoon.Api
                 client.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactoryTesting");
             });
 
+            // Mini Profiler
+            // http://anthonygiretti.com/2018/12/16/common-features-in-asp-net-core-2-2-webapi-profiling/
+            // https://miniprofiler.com/dotnet/AspDotNetCore
             services.AddMiniProfiler(options =>
                   options.RouteBasePath = "/profiler"
-               );
+               ).AddEntityFramework(); 
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -120,6 +123,7 @@ namespace Accoon.Api
             // https://ondrejbalas.com/using-serilog-with-asp-net-core-2-0/
             loggerFactory.AddSerilog();
 
+            // add Miniprofiler
             app.UseMiniProfiler();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
