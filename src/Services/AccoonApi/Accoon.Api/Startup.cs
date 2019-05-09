@@ -106,7 +106,16 @@ namespace Accoon.Api
             // https://miniprofiler.com/dotnet/AspDotNetCore
             services.AddMiniProfiler(options =>
                   options.RouteBasePath = "/profiler"
-               ).AddEntityFramework(); 
+               ).AddEntityFramework();
+
+
+            // Caching
+            // http://anthonygiretti.com/2018/12/17/common-features-in-asp-net-core-2-2-webapi-caching/
+            // https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-2.2
+            // in mrmory cache
+            services.AddMemoryCache();
+            // caching response for middlewares            
+            //services.AddResponseCaching();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -147,7 +156,10 @@ namespace Accoon.Api
             // handle error handling globaly using middleware
             // https://www.strathweb.com/2018/07/centralized-exception-handling-and-request-validation-in-asp-net-core/
             app.ConfigureExceptionHandler(env);
-  
+
+
+            // caching response for middlewares
+            //app.UseResponseCaching();
 
             app.UseMvc();
         }

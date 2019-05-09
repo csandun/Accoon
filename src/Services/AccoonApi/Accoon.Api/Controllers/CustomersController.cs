@@ -5,10 +5,12 @@ using System.Net;
 using System.Threading.Tasks;
 using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using Accoon.Api.BussinessServices.Interfaces.Services;
+using Accoon.Api.Helpers;
 using Accoon.BuildingBlocks.Common.Interfaces;
 using Accoon.BuildingBlocks.Common.Pagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace Accoon.Api.Controllers
@@ -20,20 +22,38 @@ namespace Accoon.Api.Controllers
     {
         private readonly ICustomerService customerService;
         private readonly ILogger<CustomersController> logger;
+        private readonly IMemoryCache memoryCache;
 
-        public CustomersController(ICustomerService customerService, ILogger<CustomersController> logger)
+        public CustomersController(ICustomerService customerService, ILogger<CustomersController> logger, IMemoryCache memoryCache)
         {
             this.customerService = customerService;
             this.logger = logger;
+            this.memoryCache = memoryCache;
         }
 
         [Route("")]
         [HttpGet]
         [ProducesResponseType(typeof(PaginationDto<CustomerDto>), StatusCodes.Status200OK)]
-        public ActionResult<PaginationDto<CustomerDto>> GetAll([FromQuery] int page = 1, [FromQuery] int size = 5)
-        {            
-            var paginationDto = this.customerService.GetCustomers(page, size);
-            return Ok(paginationDto);
+        //[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
+        public ActionResult<PaginationDto<CustomerDto>> GetAll([FromQuery] int page = 1, [FromQuery] int size = 5, [FromQuery] bool withCache = true)
+        {
+            PaginationDto<CustomerDto> cachedCustomerPageOne = null;
+
+            if (page == 1 && size == 5 && withCache)
+            {  
+                // using lambda
+                cachedCustomerPageOne = this.memoryCache.GetOrCreate(CacheHelper.CustomerFirstPage, entry =>
+                {
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
+                    return this.customerService.GetCustomers(page, size);
+                });
+            }
+            else
+            {
+                cachedCustomerPageOne = this.customerService.GetCustomers(page, size);
+            }
+
+            return Ok(cachedCustomerPageOne);
         }
 
         [Route("")]
@@ -41,7 +61,7 @@ namespace Accoon.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Save([FromBody] CustomerDto customerDto)
-        {  
+        {
             var id = await this.customerService.SaveCustomerAsync(customerDto);
             return CreatedAtAction(nameof(GetById), new { id = id }, null);
         }
