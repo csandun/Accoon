@@ -21,6 +21,6 @@
  - [x] IHttpClientFacotry -  NameType 
  - [x] Automapper 8.0
  - [x] Customizing automatic HTTP 400 error response and Customizing automatic 500 error response using middleware
- - [x] Pagination
+ - [x] Pagination with custom pagination filter 
  - [x] Miniprofiler
  - [x] caching - inmemory and response caching
