@@ -6,6 +6,7 @@ using Accoon.Api.DataServices.Entities;
 using Accoon.Api.Infastructure;
 using Accoon.Api.Middlewares;
 using Accoon.BuildingBlocks.Common.Concretes;
+using Accoon.BuildingBlocks.Common.Filters;
 using Accoon.BuildingBlocks.Common.Interfaces;
 using AutoMapper;
 using HealthChecks.UI.Client;
@@ -43,7 +44,12 @@ namespace Accoon.Api
             services.AddAutoMapper();
 
             // register mvc
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            services.AddMvc(
+                options =>
+                {
+                    options.Filters.AddService<PaginationOptionFilter>();
+                }
+                ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     options.InvalidModelStateResponseFactory = context =>
@@ -54,6 +60,8 @@ namespace Accoon.Api
 
                     options.ClientErrorMapping[404] = new ClientErrorData() { Link = "", Title = "Not found resources" };
                 });
+
+            services.AddTransient<PaginationOptionFilter>();
 
             // swagger 
             services.AddSwaggerGen(c =>
