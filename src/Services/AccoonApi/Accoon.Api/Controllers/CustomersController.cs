@@ -34,23 +34,19 @@ namespace Accoon.Api.Controllers
 
         }
 
+        //[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
         [Route("")]
         [HttpGet]
-        [ProducesResponseType(typeof(PaginationDto<CustomerDto>), StatusCodes.Status200OK)]
-        //[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
-        [ServiceFilter(typeof(PaginationOptionFilter))]
+        [ProducesResponseType(typeof(PaginationDto<CustomerDto>), StatusCodes.Status200OK)]        
+        [ServiceFilter(typeof(PaginationOptionFilter))] // pagination filter
         public ActionResult<PaginationDto<CustomerDto>> GetAll([FromQuery] PaginationOption paginationQueryParams, [FromQuery] bool withCache = true)
-        {
-            
-            //paginationQueryParams.Page = paginationQueryParams.Page ?? this.paginationOption.Page;
-            //paginationQueryParams.Size = paginationQueryParams.Size ?? this.paginationOption.Size;
+        {            
+            PaginationDto<CustomerDto> customerList = null;
 
-            PaginationDto<CustomerDto> cachedCustomerPageOne = null;
-
-            if (paginationQueryParams.Page == defaultPaginationOption.Page && paginationQueryParams.Size == defaultPaginationOption.Page && withCache)
+            if (paginationQueryParams.Page == defaultPaginationOption.Page && paginationQueryParams.Size == defaultPaginationOption.Size && withCache)
             {
-                // using lambda
-                cachedCustomerPageOne = this.memoryCache.GetOrCreate(CacheHelper.CustomerFirstPage, entry =>
+                // using lambda function setting the cache
+                customerList = this.memoryCache.GetOrCreate(CacheHelper.CustomerFirstPage, entry =>
                 {
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
                     return this.customerService.GetCustomers(paginationQueryParams.Page, paginationQueryParams.Size);
@@ -58,10 +54,10 @@ namespace Accoon.Api.Controllers
             }
             else
             {
-                cachedCustomerPageOne = this.customerService.GetCustomers(paginationQueryParams.Page, paginationQueryParams.Size);
+                customerList = this.customerService.GetCustomers(paginationQueryParams.Page, paginationQueryParams.Size);
             }
 
-            return Ok(cachedCustomerPageOne);
+            return Ok(customerList);
         }
 
         [Route("")]

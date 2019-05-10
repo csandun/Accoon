@@ -7,26 +7,58 @@ using System.Text;
 
 namespace Accoon.BuildingBlocks.Common.Filters
 {
-    public class PaginationOptionFilter :  IActionFilter
+    public class PaginationOptionFilter : IActionFilter
     {
-        private readonly PaginationOption paginationOption;
+        private readonly PaginationOption defaultPaginationOption;
         public PaginationOptionFilter(IOptions<PaginationOption> option)
         {
-            this.paginationOption = option.Value;
+            this.defaultPaginationOption = option.Value;
         }
 
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-            //throw new NotImplementedException();
-        }
+        public void OnActionExecuted(ActionExecutedContext context) { }
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            object page = null;
-            context.ActionArguments.TryGetValue("Page", out page);
-            if ((PaginationOption)page == null)
+            // get query params
+            var argumentValues = context.ActionArguments.Values;
+            int page = 0;
+            int size = 0;
+
+            var isIncludePaginationOption = false;
+            // looping the argument values
+            foreach (var value in argumentValues)
             {
-                context.ActionArguments["Page"] = this.paginationOption.Page;
+                // check value type quals to PaginationOption class
+                if (value.GetType().Equals(typeof(PaginationOption)))
+                {
+                    // if it is true cast the value object
+                    page = ((PaginationOption)value).Page;
+                    size = ((PaginationOption)value).Size;
+
+                    // if page and size are equal and less than zero set the defult values from appsettings
+                    if (page <= 0)
+                    {
+                        page = this.defaultPaginationOption.Page;
+                    }
+
+                    if (size <= 0)
+                    {
+                        size = this.defaultPaginationOption.Size;
+                    }
+
+                    // set the values again to context argumetns
+                    ((PaginationOption)value).Page = page;
+                    ((PaginationOption)value).Size = size;
+
+                    isIncludePaginationOption = true;
+                    break;
+                }
+            }
+
+            // return error when filter pitting without adding qury parameter
+            if (!isIncludePaginationOption)
+            {
+                throw new Exception("Please add [FromQuery] PaginationOption object");
             }
         }
     }
