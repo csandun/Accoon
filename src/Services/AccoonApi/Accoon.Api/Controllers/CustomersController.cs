@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Accoon.Api.BussinessServices.Entities.EntityDTOs;
+﻿using Accoon.Api.BussinessServices.Entities.EntityDTOs;
 using Accoon.Api.BussinessServices.Interfaces.Services;
 using Accoon.Api.Helpers;
-using Accoon.BuildingBlocks.Common.Interfaces;
+using Accoon.BuildingBlocks.Common.Entities;
+using Accoon.BuildingBlocks.Common.Filters;
 using Accoon.BuildingBlocks.Common.Pagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
+using System.Threading.Tasks;
 
 namespace Accoon.Api.Controllers
 {
@@ -23,37 +22,42 @@ namespace Accoon.Api.Controllers
         private readonly ICustomerService customerService;
         private readonly ILogger<CustomersController> logger;
         private readonly IMemoryCache memoryCache;
+        private readonly PaginationOption defaultPaginationOption;
 
-        public CustomersController(ICustomerService customerService, ILogger<CustomersController> logger, IMemoryCache memoryCache)
+
+        public CustomersController(ICustomerService customerService, ILogger<CustomersController> logger, IMemoryCache memoryCache, IOptions<PaginationOption> defaultPaginationOption)
         {
             this.customerService = customerService;
             this.logger = logger;
             this.memoryCache = memoryCache;
+            this.defaultPaginationOption = defaultPaginationOption.Value;
+
         }
 
+        //[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
         [Route("")]
         [HttpGet]
-        [ProducesResponseType(typeof(PaginationDto<CustomerDto>), StatusCodes.Status200OK)]
-        //[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
-        public ActionResult<PaginationDto<CustomerDto>> GetAll([FromQuery] int page = 1, [FromQuery] int size = 5, [FromQuery] bool withCache = true)
-        {
-            PaginationDto<CustomerDto> cachedCustomerPageOne = null;
+        [ProducesResponseType(typeof(PaginationDto<CustomerDto>), StatusCodes.Status200OK)]        
+        [ServiceFilter(typeof(PaginationOptionFilter))] // pagination filter
+        public ActionResult<PaginationDto<CustomerDto>> GetAll([FromQuery] PaginationOption paginationQueryParams, [FromQuery] bool withCache = true)
+        {            
+            PaginationDto<CustomerDto> customerList = null;
 
-            if (page == 1 && size == 5 && withCache)
-            {  
-                // using lambda
-                cachedCustomerPageOne = this.memoryCache.GetOrCreate(CacheHelper.CustomerFirstPage, entry =>
+            if (paginationQueryParams.Page == defaultPaginationOption.Page && paginationQueryParams.Size == defaultPaginationOption.Size && withCache)
+            {
+                // using lambda function setting the cache
+                customerList = this.memoryCache.GetOrCreate(CacheHelper.CustomerFirstPage, entry =>
                 {
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
-                    return this.customerService.GetCustomers(page, size);
+                    return this.customerService.GetCustomers(paginationQueryParams.Page, paginationQueryParams.Size);
                 });
             }
             else
             {
-                cachedCustomerPageOne = this.customerService.GetCustomers(page, size);
+                customerList = this.customerService.GetCustomers(paginationQueryParams.Page, paginationQueryParams.Size);
             }
 
-            return Ok(cachedCustomerPageOne);
+            return Ok(customerList);
         }
 
         [Route("")]

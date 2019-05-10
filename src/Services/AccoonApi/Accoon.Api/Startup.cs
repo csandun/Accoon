@@ -6,6 +6,8 @@ using Accoon.Api.DataServices.Entities;
 using Accoon.Api.Infastructure;
 using Accoon.Api.Middlewares;
 using Accoon.BuildingBlocks.Common.Concretes;
+using Accoon.BuildingBlocks.Common.Entities;
+using Accoon.BuildingBlocks.Common.Filters;
 using Accoon.BuildingBlocks.Common.Interfaces;
 using AutoMapper;
 using HealthChecks.UI.Client;
@@ -41,9 +43,17 @@ namespace Accoon.Api
         {
             // register automapper
             services.AddAutoMapper();
+            
+            // read pagination option data to class
+            services.Configure<PaginationOption>(Configuration.GetSection("PaginationOption"));
+
+            // pagination option filter 
+            services.AddTransient<PaginationOptionFilter>();
 
             // register mvc
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            services.AddMvc(
+                
+                ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     options.InvalidModelStateResponseFactory = context =>
