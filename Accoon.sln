@@ -46,7 +46,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway-Base", "src\ApiG
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccoonTestApi", "AccoonTestApi", "{CBA35F12-F6B8-4716-8B8B-D57CB31CF954}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccoonTest.Api", "src\Services\AccoonTestApi\AccoonTest.Api\AccoonTest.Api.csproj", "{58347CC1-2DD0-4D1A-80C5-D88C563E5B00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccoonTest.Api", "src\Services\AccoonTestApi\AccoonTest.Api\AccoonTest.Api.csproj", "{58347CC1-2DD0-4D1A-80C5-D88C563E5B00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityApi", "IdentityApi", "{EAC20A28-DEAF-4477-938C-20959D283ECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "src\Services\IdentityApi\Identity.Api\Identity.Api.csproj", "{0C0FDEDA-8FCB-42AC-8280-DA5C365ADC05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +110,10 @@ Global
 		{58347CC1-2DD0-4D1A-80C5-D88C563E5B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58347CC1-2DD0-4D1A-80C5-D88C563E5B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58347CC1-2DD0-4D1A-80C5-D88C563E5B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C0FDEDA-8FCB-42AC-8280-DA5C365ADC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C0FDEDA-8FCB-42AC-8280-DA5C365ADC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C0FDEDA-8FCB-42AC-8280-DA5C365ADC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C0FDEDA-8FCB-42AC-8280-DA5C365ADC05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +137,8 @@ Global
 		{D5871A34-2F6B-40C1-A7AC-2B807D7C8D82} = {EE504D70-CD58-4D3D-AA7D-9EF765E40360}
 		{CBA35F12-F6B8-4716-8B8B-D57CB31CF954} = {773C1854-7EAC-4BE5-838B-2461E33530F1}
 		{58347CC1-2DD0-4D1A-80C5-D88C563E5B00} = {CBA35F12-F6B8-4716-8B8B-D57CB31CF954}
+		{EAC20A28-DEAF-4477-938C-20959D283ECA} = {773C1854-7EAC-4BE5-838B-2461E33530F1}
+		{0C0FDEDA-8FCB-42AC-8280-DA5C365ADC05} = {EAC20A28-DEAF-4477-938C-20959D283ECA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCFA0C45-859D-404B-9B33-A36D1340E828}
