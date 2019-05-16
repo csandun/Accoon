@@ -13,8 +13,7 @@ namespace Accoon.Api
     {
         public UserProfile()
         {
-            CreateMap<CustomerDto, CustomerEntity>();
-            CreateMap<CustomerEntity, CustomerDto>();
+            CreateMap<CustomerDto, CustomerEntity>().ReverseMap();
             CreateMap< PaginationModel<CustomerEntity, long>, PaginationDto<CustomerDto>>();
         }
     }
