@@ -9,7 +9,12 @@
           "Port": 7001
         }
       ],
-      "UpstreamPathTemplate": "/accoon-api/{catchAll}"
+      "UpstreamPathTemplate": "/accoon-api/{catchAll}",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotKey",
+        "AllowedScopes": [ "OcelotApi" ]
+      }
+
     },
     {
       "DownstreamPathTemplate": "/api/{catchAll}",
