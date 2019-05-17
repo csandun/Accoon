@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using static Identity.Api.AppConfig;
 
 namespace Identity.Api
 {
@@ -42,31 +43,32 @@ namespace Identity.Api
         }
     }
 
-    public class ApiConfig
+    public static class AppConfig
     {
-
-        public static IEnumerable<ApiResource> GetApiResources()
+        public static class ApiConfig
         {
-            return new[]
+
+            public static IEnumerable<ApiResource> GetApiResources()
             {
-                new ApiResource("OcelotApi", "OcelotDemoAPi")
+                return new[]
+                {
+                new ApiResource("OcelotApi", "OcelotApi")
             };
-        }
+            }
 
-        public static IEnumerable<Client> GetClients()
-        {
-           var a = new[]
+            public static IEnumerable<Client> GetClients()
             {
+                return new[]
+                {
                 new Client
                 {
-                    ClientId = "OcelotDemo",
-                    ClientSecrets = new [] { new Secret("aaa".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientId = "chathuranga",
+                    ClientSecrets = new [] { new Secret("sandun".Sha256()) },
+                    AllowedGrantTypes = IdentityServer4.Models.GrantTypes.ClientCredentials,
                     AllowedScopes = new [] { "OcelotApi" }
                 }
             };
-
-            return a;
+            }
         }
     }
 }

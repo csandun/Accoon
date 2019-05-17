@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiGateway_Base.Models;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,17 +28,20 @@ namespace ApiGateway_Base
         public void ConfigureServices(IServiceCollection services)
         {
             var authenticationProviderKey = "OcelotKey";
-           services.AddAuthentication("Bearer")
+            var identityServerOptions = new IdentityServerOptions();
+            _cfg.Bind("IdentityServerOptions", identityServerOptions);
+            services.AddAuthentication(identityServerOptions.IdentityScheme)
                 .AddIdentityServerAuthentication(authenticationProviderKey, options =>
                 {
-                    options.RequireHttpsMetadata = false; 
-                    options.Authority = $"http://localhost:5000";
-                    options.ApiName = "authapi"; 
+                    options.RequireHttpsMetadata = false;
+                    options.Authority = $"http://{identityServerOptions.ServerIP}:{identityServerOptions.ServerPort}";
+                    options.ApiName = identityServerOptions.ResourceName;
                     options.SupportedTokens = SupportedTokens.Both;
                 }
                 );
 
-            services.AddOcelot(_cfg);
+
+            services.AddOcelot();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +51,8 @@ namespace ApiGateway_Base
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseOcelot().Wait();
         }

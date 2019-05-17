@@ -50,7 +50,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccoonTest.Api", "src\Servi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityApi", "IdentityApi", "{EAC20A28-DEAF-4477-938C-20959D283ECA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "src\Services\IdentityApi\Identity.Api\Identity.Api.csproj", "{0C0FDEDA-8FCB-42AC-8280-DA5C365ADC05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "src\Services\IdentityApi\Identity.Api\Identity.Api.csproj", "{0C0FDEDA-8FCB-42AC-8280-DA5C365ADC05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
