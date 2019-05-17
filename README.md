@@ -24,4 +24,4 @@
  - [x] Pagination with custom pagination filter 
  - [x] Miniprofiler
  - [x] caching - inmemory and response caching
- - [x] api gateway with ocelot, TODO - authenticaiton / Caching / Logging
+ - [x] api gateway with ocelot, (with authenticaiton) TODO -  Caching / Logging
