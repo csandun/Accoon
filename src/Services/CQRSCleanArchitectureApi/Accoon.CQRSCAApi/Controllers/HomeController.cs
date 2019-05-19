@@ -14,15 +14,11 @@ namespace Accoon.CQRSCAApi.Controllers
     {
         [Route("")]
         [HttpGet]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         public IActionResult Get()
         {
             return Ok("Running api");
         }
-
-
-
-
     }
     internal class Test
     {
