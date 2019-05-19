@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -12,9 +13,22 @@ namespace Accoon.CQRSCAApi.Controllers
     public class HomeController : ControllerBase
     {
         [Route("")]
+        [HttpGet]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public IActionResult Get()
         {
             return Ok("Running api");
         }
+
+
+
+
+    }
+    internal class Test
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+
     }
 }
