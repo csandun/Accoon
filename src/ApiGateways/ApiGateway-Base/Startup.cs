@@ -58,3 +58,8 @@ namespace ApiGateway_Base
         }
     }
 }
+
+// API-Gateway resources
+// https://www.cnblogs.com/yilezhu/p/9807125.html
+// https://www.pogsdotnet.com/2018/08/building-simple-api-gateways-with.html
+
