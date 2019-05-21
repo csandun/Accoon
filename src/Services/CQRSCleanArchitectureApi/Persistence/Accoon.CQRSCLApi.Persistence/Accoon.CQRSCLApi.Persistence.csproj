@@ -5,17 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Infastructure\" />
-    <Folder Include="UserCases\GetAllCustomers\" />
+    <Folder Include="infastructure\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.4.0" />
-    <PackageReference Include="MediatR" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Domin\Accoon.CQRSCLApi.Domain\Accoon.CQRSCLApi.Domain.csproj" />
+    <ProjectReference Include="..\..\Application\Accoon.CQRSCAApi.Application\Accoon.CQRSCAApi.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
