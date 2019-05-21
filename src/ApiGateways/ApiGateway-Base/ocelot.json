@@ -31,6 +31,11 @@
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:7000",
     "AdministrationPath": "/administration",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    },
     "RateLimitOptions": {
       "DisableRateLimitHeaders": false,
       "QuotaExceededMessage": "Customize Tips!",

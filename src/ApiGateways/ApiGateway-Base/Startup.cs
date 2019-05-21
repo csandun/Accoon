@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 
 namespace ApiGateway_Base
 {
@@ -40,8 +41,7 @@ namespace ApiGateway_Base
                 }
                 );
 
-
-            services.AddOcelot();
+            services.AddOcelot().AddConsul();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,3 +63,6 @@ namespace ApiGateway_Base
 // https://www.cnblogs.com/yilezhu/p/9807125.html
 // https://www.pogsdotnet.com/2018/08/building-simple-api-gateways-with.html
 
+// Consul
+//https://cecilphillip.com/using-consul-for-service-discovery-with-asp-net-core/
+//https://learn.hashicorp.com/consul/getting-started/install
