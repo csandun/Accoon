@@ -23,9 +23,10 @@ namespace Accoon.Api.Controllers
 
         // GET api/values
         [HttpGet]
-        public async Task<ValueDTO> Get()
+        public async Task<string[]> Get()
         {
-            return await this._valueService.TestValueServiceMethod();
+            //return await this._valueService.TestValueServiceMethod();
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
