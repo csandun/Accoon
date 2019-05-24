@@ -1,0 +1,40 @@
+{  
+  "services": [
+    {
+      "id": "ApiServiceA",
+      "name": "ApiServiceA",
+      "tags": [ "ApiServiceA" ],
+      "address": "localhost",
+      "port": 7001,
+	   "checks": [
+        {
+          "id": "ApiServiceA_Check",
+          "name": "ApiServiceA_Check",
+          "http": "http://localhost:7001/hc",
+          "interval": "10s",
+          "tls_skip_verify": false,
+          "method": "GET",
+          "timeout": "1s"
+        }
+      ]
+    },
+    {
+      "id": "ApiServiceB",
+      "name": "ApiServiceB",
+      "tags": [ "ApiServiceB" ],
+      "address": "localhost",
+      "port": 7002,
+	   "checks": [
+        {
+          "id": "ApiServiceB_Check",
+          "name": "ApiServiceB_Check",
+          "http": "http://localhost:7002/api/values",
+          "interval": "10s",
+          "tls_skip_verify": false,
+          "method": "GET",
+          "timeout": "1s"
+        }
+      ]
+    }
+  ]
+}
