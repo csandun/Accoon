@@ -70,6 +70,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accoon.CQRSCLApi.Persistence", "src\Services\CQRSCleanArchitectureApi\Persistence\Accoon.CQRSCLApi.Persistence\Accoon.CQRSCLApi.Persistence.csproj", "{00DDFAEF-4FF7-47B7-9650-95E2DC414A49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accoon.CQRSCLApi.Infastructure", "src\Services\CQRSCleanArchitectureApi\Infastructure\Accoon.CQRSCLApi.Infastructure\Accoon.CQRSCLApi.Infastructure.csproj", "{21CCB98E-0264-4E83-B35E-B7D02FAB10BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +150,10 @@ Global
 		{00DDFAEF-4FF7-47B7-9650-95E2DC414A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00DDFAEF-4FF7-47B7-9650-95E2DC414A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00DDFAEF-4FF7-47B7-9650-95E2DC414A49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21CCB98E-0264-4E83-B35E-B7D02FAB10BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21CCB98E-0264-4E83-B35E-B7D02FAB10BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21CCB98E-0264-4E83-B35E-B7D02FAB10BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21CCB98E-0264-4E83-B35E-B7D02FAB10BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,6 +188,7 @@ Global
 		{FA00A8AE-F843-4EC5-AAAC-E670F704F9E0} = {B0E0F655-5A5F-4880-816B-95FF7F80F803}
 		{B6EFA5E7-E23A-4E48-8944-3E5ED6E11A5E} = {A207AE91-AAC5-4A06-B44D-3592B19DB726}
 		{00DDFAEF-4FF7-47B7-9650-95E2DC414A49} = {B6EFA5E7-E23A-4E48-8944-3E5ED6E11A5E}
+		{21CCB98E-0264-4E83-B35E-B7D02FAB10BE} = {89D21399-B450-4763-8A9A-8069005DB557}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCFA0C45-859D-404B-9B33-A36D1340E828}
