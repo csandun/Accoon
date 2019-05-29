@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Concretes\" />
+    <ProjectReference Include="..\..\Application\Accoon.CQRSCAApi.Application\Accoon.CQRSCAApi.Application.csproj" />
   </ItemGroup>
 
 </Project>
