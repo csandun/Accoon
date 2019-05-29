@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Accoon.CQRSCAApi.Application.Interfaces;
+using Accoon.CQRSCAApi.Application.UserCases.CreateCustomer;
+using Accoon.CQRSCLApi.Infastructure;
+using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
+
 
 namespace Accoon.CQRSCAApi
 {
@@ -17,6 +22,9 @@ namespace Accoon.CQRSCAApi
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
+
+            services.AddMediatR(typeof(CreateCustomerHandler).GetTypeInfo().Assembly);
+            services.AddTransient<INotificationService, NotificationService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
