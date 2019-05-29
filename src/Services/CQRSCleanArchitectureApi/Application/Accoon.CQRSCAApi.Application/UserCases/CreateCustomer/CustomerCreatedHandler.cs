@@ -10,7 +10,7 @@ namespace Accoon.CQRSCAApi.Application.UserCases.CreateCustomer
     public class CustomerCreatedHandler : INotificationHandler<CustomerCreated>
     {
         public Task Handle(CustomerCreated notification, CancellationToken cancellationToken)
-        {
+        {   
             throw new NotImplementedException();
         }
     }

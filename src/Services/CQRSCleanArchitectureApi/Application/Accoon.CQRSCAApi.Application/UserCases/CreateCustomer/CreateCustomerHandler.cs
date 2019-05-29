@@ -17,7 +17,9 @@ namespace Accoon.CQRSCAApi.Application.UserCases.CreateCustomer
         }
 
         public async Task<Unit> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
-        {
+        {   
+            //insert customer to database
+
             await this.mediator.Publish(new CustomerCreated { CustomerId = Guid.NewGuid() }, cancellationToken);
 
             return Unit.Value;
