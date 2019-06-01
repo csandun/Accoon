@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Accoon.CQRSCAApi.Application.UserCases.CreateCustomer
 {
-    public class CreateCustomerCommand : IRequest
+    public class CreateCustomerCommand : IRequest<CustomerCreated>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

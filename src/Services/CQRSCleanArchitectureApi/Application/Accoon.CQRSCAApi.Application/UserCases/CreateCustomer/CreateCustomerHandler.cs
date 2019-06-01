@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Accoon.CQRSCAApi.Application.UserCases.CreateCustomer
 {
-    public class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, Unit>
+    public class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, CustomerCreated>
     {
         private readonly IMediator mediator;
 
@@ -16,13 +16,13 @@ namespace Accoon.CQRSCAApi.Application.UserCases.CreateCustomer
             this.mediator = mediator;
         }
 
-        public async Task<Unit> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
-        {   
+        public async Task<CustomerCreated> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        {
             //insert customer to database
+            var newcustomer = new CustomerCreated { CustomerId = Guid.NewGuid() };
+            await this.mediator.Publish(newcustomer, cancellationToken);
 
-            await this.mediator.Publish(new CustomerCreated { CustomerId = Guid.NewGuid() }, cancellationToken);
-
-            return Unit.Value;
+            return newcustomer;
         }
     }
 }

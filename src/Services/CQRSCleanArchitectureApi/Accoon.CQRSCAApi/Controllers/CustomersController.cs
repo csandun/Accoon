@@ -23,8 +23,8 @@ namespace Accoon.CQRSCAApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCustomerCommand  createCustomerCommand)
         {
-            var a = await this.mediator.Send(createCustomerCommand);
-            return Ok(a);
+            var customerId = await this.mediator.Send(createCustomerCommand);
+            return CreatedAtAction("",customerId);
         }
 
         
