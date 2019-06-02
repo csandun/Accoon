@@ -1,7 +1,8 @@
 language: csharp
-solution: Accoon.sln
-dotnet: 2.2
 mono: none
+sudo: required
+dist: xenial
+dotnet: 2.2
 script:
     - cd 'src\Services\AccoonApi\Accoon.Api'
     - dotnet build -c Release
