@@ -57,6 +57,7 @@ namespace ApiGateway_Base
             app.UseOcelot().Wait();
         }
     }
+}
 
 
 // API-Gateway resources
