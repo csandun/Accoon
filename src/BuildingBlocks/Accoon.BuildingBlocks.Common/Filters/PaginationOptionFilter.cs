@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Accoon.BuildingBlocks.Common.Filters
 {
-    public class PaginationOptionFilter : IActionFilte
+    public class PaginationOptionFilter : IActionFilte 
     {
         private readonly PaginationOption defaultPaginationOption;
         public PaginationOptionFilter(IOptions<PaginationOption> option)
