@@ -3,6 +3,8 @@ mono: none
 sudo: required
 dist: xenial
 dotnet: 2.2
+branch: 
+    - master
 script:
     - dotnet build src\\Services\\AccoonApi\\Accoon.Api -c Release
     - dotnet build src\\Services\\AccoonTestApi\\AccoonTest.Api -c Release
