@@ -5,3 +5,7 @@ dist: xenial
 dotnet: 2.2
 script:
     - dotnet build src\\Services\\AccoonApi\\Accoon.Api -c Release
+    - dotnet build src\\Services\\AccoonTestApi\\AccoonTest.Api -c Release
+    - dotnet build src\\Services\\IdentityApi\\Identity.Api -c Release
+    - dotnet build src\\Services\\CQRSCleanArchitectureApi\\Accoon.CQRSCAApi -c Release
+    - dotnet build src\\ApiGateways\\ApiGateway-Base -c Release
