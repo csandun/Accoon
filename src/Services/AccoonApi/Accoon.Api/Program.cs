@@ -26,6 +26,11 @@ namespace Accoon.Api
             // run migrations using extension method
             host.MigrateDbContext<AccoonDbContext>((context, services) =>
             {
+                context.Customers.Add(new DataServices.Entities.CustomEntities.CustomerEntity()
+                {
+                    Name = "Sandun",
+                    Age = 25
+                });
             });
 
             host.Run();
