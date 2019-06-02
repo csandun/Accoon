@@ -20,12 +20,21 @@ namespace Accoon.CQRSCAApi.Controllers
             this.mediator = mediator;
         }
 
+        [Route("")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCustomerCommand  createCustomerCommand)
         {
-            var customerId = await this.mediator.Send(createCustomerCommand);
-            return CreatedAtAction("",customerId);
+            var customer = await this.mediator.Send(createCustomerCommand);
+            return CreatedAtAction(nameof(Get),new { id = customer.CustomerId}, null);
         }
+
+        [Route("{id}")]
+        [HttpGet]
+        public ActionResult Get([FromRoute] Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
 
         
     }
