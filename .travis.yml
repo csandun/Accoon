@@ -4,5 +4,4 @@ sudo: required
 dist: xenial
 dotnet: 2.2
 script:
-    - cd src\\Services\\AccoonApi\\Accoon.Api
-    - dotnet build -c Release
+    - dotnet build src\\Services\\AccoonApi\\Accoon.Api -c Release
