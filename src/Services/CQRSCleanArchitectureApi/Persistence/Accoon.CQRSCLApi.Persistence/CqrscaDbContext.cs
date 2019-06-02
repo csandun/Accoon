@@ -8,11 +8,10 @@ using System.Text;
 
 namespace Accoon.CQRSCLApi.Persistence
 {
-    public abstract class CqrscaDbContext : DbContext, ICqrscaDbContext
+    public class CqrscaDbContext : DbContext, ICqrscaDbContext
     {
         public CqrscaDbContext(DbContextOptions<CqrscaDbContext> options):base(options)
         {
-
         }
         public DbSet<Customer> Customers { get ; set ; }
 

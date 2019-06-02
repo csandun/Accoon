@@ -18,6 +18,13 @@
   <ItemGroup>
     <ProjectReference Include="..\Application\Accoon.CQRSCAApi.Application\Accoon.CQRSCAApi.Application.csproj" />
     <ProjectReference Include="..\Infastructure\Accoon.CQRSCLApi.Infastructure\Accoon.CQRSCLApi.Infastructure.csproj" />
+    <ProjectReference Include="..\Persistence\Accoon.CQRSCLApi.Persistence\Accoon.CQRSCLApi.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

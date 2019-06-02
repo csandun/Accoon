@@ -43,7 +43,7 @@ namespace Accoon.Api
         }
 
         // get config settings and values
-        private static IConfiguration GetConfiguration()
+        private  static IConfiguration GetConfiguration()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
