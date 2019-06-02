@@ -1,4 +1,4 @@
-{  
+{
   "services": [
     {
       "id": "ApiServiceA",
@@ -6,7 +6,7 @@
       "tags": [ "ApiServiceA" ],
       "address": "localhost",
       "port": 7001,
-	   "checks": [
+      "checks": [
         {
           "id": "ApiServiceA_Check",
           "name": "ApiServiceA_Check",
@@ -24,7 +24,7 @@
       "tags": [ "ApiServiceB" ],
       "address": "localhost",
       "port": 7002,
-	   "checks": [
+      "checks": [
         {
           "id": "ApiServiceB_Check",
           "name": "ApiServiceB_Check",
