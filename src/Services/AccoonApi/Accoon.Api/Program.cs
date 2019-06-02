@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Accoon.Api.DataServices.Entities;
-using Accoon.Api.Infastructure;
+using Accoon.BuildingBlocks.Common.Infastructure;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +31,12 @@ namespace Accoon.Api
                     Name = "Sandun",
                     Age = 25
                 });
+
+                if (!context.Customers.Any())
+                {
+                    context.SaveChanges();
+                }
+                
             });
 
             host.Run();
