@@ -1,9 +1,10 @@
-# Accoon [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.svg?branch=master)](https://travis-ci.org/ChathurangaSandun/Accoon)
+# Accoon 
+Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.svg?branch=master)](https://travis-ci.org/ChathurangaSandun/Accoon)
 
 ## Fetures
  - [x] Microservices 
  - [x] Docker Compose / File
- - [ ] CI / CD
+ - [ ] CI / CD ( - [x] With Travis)
  - [x] Generic Unit of work
  - [x] Generic Repository Pattern 
  - [ ] Generic Service classes
