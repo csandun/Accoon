@@ -9,3 +9,4 @@ script:
     - dotnet build src\\Services\\IdentityApi\\Identity.Api -c Release
     - dotnet build src\\Services\\CQRSCleanArchitectureApi\\Accoon.CQRSCAApi -c Release
     - dotnet build src\\ApiGateways\\ApiGateway-Base -c Release
+    - dotnet build src\\Web\\WebStatus -c Release
