@@ -27,3 +27,4 @@ Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.s
  - [x] caching - inmemory and response caching
  - [x] api gateway with ocelot, (with authenticaiton) TODO -  Caching / Logging
  - [x] CQRS with Clean Architecture
+ - [x] Mediatr with CQRS 
