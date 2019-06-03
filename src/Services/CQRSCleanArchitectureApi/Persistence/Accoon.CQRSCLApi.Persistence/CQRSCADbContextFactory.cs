@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Accoon.CQRSCLApi.Persistence.infastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
+using System.Diagnostics;
+using System.IO;
 
 namespace Accoon.CQRSCLApi.Persistence
 {
@@ -13,7 +16,7 @@ namespace Accoon.CQRSCLApi.Persistence
 
         public CQRSCADbContextFactory()
         {
-
+            Debugger.Launch();
         }
 
         public CQRSCADbContextFactory(DbContextOptions<CqrscaDbContext> options)
@@ -22,19 +25,23 @@ namespace Accoon.CQRSCLApi.Persistence
         }
         public CqrscaDbContext CreateDbContext(string[] args)
         {
-            // Get environment
-            string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var currentDirentory = Path.Combine(Directory.GetCurrentDirectory());
+            Console.WriteLine(currentDirentory);
+            var resolver = new DependencyResolver
+            {
+                CurrentDirectory = currentDirentory
+               
+            };
 
-
-
-            var optionsBuilder = new DbContextOptionsBuilder<CqrscaDbContext>();
-            optionsBuilder.UseSqlServer("Server=tcp:127.0.0.1,1433;Database=AccoonCQRSDatabase;User Id=sa;Password=Ringer#123;ConnectRetryCount=0;");
-                
-
-            return new CqrscaDbContext(optionsBuilder.Options);
+            return resolver.ServiceProvider.GetService(typeof(CqrscaDbContext)) as CqrscaDbContext;
         }
     }
-
-    // https://blog.tonysneed.com/2018/12/20/idesigntimedbcontextfactory-and-dependency-injection-a-love-story/
-    // https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dbcontext-creation
 }
+
+// Design-time DbContext Creation in code first migration
+// https://blog.tonysneed.com/2018/12/20/idesigntimedbcontextfactory-and-dependency-injection-a-love-story/
+// https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dbcontext-creation
+
+// Debug the senario
+// Debugger.Launch()
+// Add Debugger.Launch() to the beginning of the constructor to launch the just-in-time debugger. This lets you attach VS to the process and debug it like normal.

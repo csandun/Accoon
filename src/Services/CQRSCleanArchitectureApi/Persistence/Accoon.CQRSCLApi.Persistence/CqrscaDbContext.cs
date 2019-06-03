@@ -21,3 +21,7 @@ namespace Accoon.CQRSCLApi.Persistence
         }
     }
 }
+
+// migration commands
+// Add-Migration InitMigration -Project Accoon.CQRSCLApi.Persistence -StartupProject Accoon.CQRSCAApi -Context CqrscaDbContext
+// update-database -Project Accoon.CQRSCLApi.Persistence -StartupProject Accoon.CQRSCAApi

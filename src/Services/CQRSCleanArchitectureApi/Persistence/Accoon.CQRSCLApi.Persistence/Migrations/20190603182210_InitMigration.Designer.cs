@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Accoon.CQRSCLApi.Persistence.Migrations
 {
     [DbContext(typeof(CqrscaDbContext))]
-    [Migration("20190603123109_InitMigration")]
+    [Migration("20190603182210_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
