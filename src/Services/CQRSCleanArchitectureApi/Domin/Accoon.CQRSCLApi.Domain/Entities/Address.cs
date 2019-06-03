@@ -11,6 +11,6 @@ namespace Accoon.CQRSCLApi.Domain.Entities
         public string Street { get; set; }
         public string City { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        //public virtual Customer Customer { get; set; }
     }
 }

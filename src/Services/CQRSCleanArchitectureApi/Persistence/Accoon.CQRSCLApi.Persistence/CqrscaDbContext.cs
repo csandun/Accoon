@@ -8,11 +8,10 @@ using System.Text;
 
 namespace Accoon.CQRSCLApi.Persistence
 {
-    public abstract class CqrscaDbContext : DbContext, ICqrscaDbContext
+    public class CqrscaDbContext : DbContext, ICqrscaDbContext
     {
         public CqrscaDbContext(DbContextOptions<CqrscaDbContext> options):base(options)
         {
-
         }
         public DbSet<Customer> Customers { get ; set ; }
 
@@ -22,3 +21,7 @@ namespace Accoon.CQRSCLApi.Persistence
         }
     }
 }
+
+// migration commands
+// Add-Migration InitMigration -Project Accoon.CQRSCLApi.Persistence -StartupProject Accoon.CQRSCAApi -Context CqrscaDbContext
+// update-database -Project Accoon.CQRSCLApi.Persistence -StartupProject Accoon.CQRSCAApi
