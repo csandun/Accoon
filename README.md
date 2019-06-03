@@ -9,7 +9,7 @@ Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.s
  - [x] Generic Repository Pattern 
  - [ ] Generic Service classes
  - [x] Register DI Automatically
- - [x] Database First - **Hack it. Resolve Design-time DbContext Creation and Debug it**
+ - [x] Database First - **Hacked it. Resolve Design-time DbContext Creation and Debug it**
  - [x] Auto Database Migrations and seeding
  - [x] Health Check api / UI
  - [x] Swagger
