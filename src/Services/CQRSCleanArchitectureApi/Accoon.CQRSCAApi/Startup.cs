@@ -26,9 +26,9 @@ namespace Accoon.CQRSCAApi
         {
 
             // register db context and migration assebly
-            var connectionString = Configuration["ConnectionString"].ToString();
+            var connectionString = Configuration.GetConnectionString("CQRSCADbContext").ToString();
             services.AddDbContext<CqrscaDbContext>
-                (options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly("Accoon.CQRSCLApi.Domain.Entities")));
+                (options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly("Accoon.CQRSCLApi.Domain")));
 
             // add mvc             
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);

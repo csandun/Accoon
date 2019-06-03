@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 
 namespace Accoon.CQRSCLApi.Persistence
 {
@@ -21,6 +22,11 @@ namespace Accoon.CQRSCLApi.Persistence
         }
         public CqrscaDbContext CreateDbContext(string[] args)
         {
+            // Get environment
+            string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+
+
             var optionsBuilder = new DbContextOptionsBuilder<CqrscaDbContext>();
             optionsBuilder.UseSqlServer("Server=tcp:127.0.0.1,1433;Database=AccoonCQRSDatabase;User Id=sa;Password=Ringer#123;ConnectRetryCount=0;");
                 
