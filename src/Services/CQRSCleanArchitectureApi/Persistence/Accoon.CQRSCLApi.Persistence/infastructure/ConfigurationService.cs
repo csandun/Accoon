@@ -17,6 +17,7 @@ namespace Accoon.CQRSCLApi.Persistence.infastructure
             EnvService = envService;
         }
 
+        // read appsettings file get settings json
         public IConfiguration GetConfiguration()
         {
             CurrentDirectory = CurrentDirectory ?? Directory.GetCurrentDirectory();

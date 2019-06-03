@@ -12,17 +12,11 @@ namespace Accoon.CQRSCLApi.Persistence
 
     public class CQRSCADbContextFactory : IDesignTimeDbContextFactory<CqrscaDbContext>
     {
-        private readonly DbContextOptions<CqrscaDbContext> options;
-
         public CQRSCADbContextFactory()
         {
-            Debugger.Launch();
+            //Debugger.Launch();
         }
 
-        public CQRSCADbContextFactory(DbContextOptions<CqrscaDbContext> options)
-        {
-            this.options = options;
-        }
         public CqrscaDbContext CreateDbContext(string[] args)
         {
             var currentDirentory = Path.Combine(Directory.GetCurrentDirectory());
