@@ -30,6 +30,8 @@ namespace Accoon.CQRSCAApi
             services.AddDbContext<CqrscaDbContext>
                 (options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly("Accoon.CQRSCLApi.Domain")));
 
+            services.AddTransient<ICqrscaDbContext, CqrscaDbContext>();
+
             // add mvc             
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
 
