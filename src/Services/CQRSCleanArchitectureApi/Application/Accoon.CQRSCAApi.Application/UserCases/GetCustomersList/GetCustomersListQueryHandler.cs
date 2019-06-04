@@ -1,7 +1,9 @@
 ﻿using Accoon.CQRSCAApi.Application.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,24 +19,21 @@ namespace Accoon.CQRSCAApi.Application.UserCases.GetCustomersList
             this.cqrscaDbContext = cqrscaDbContext;
         }
 
-        public Task<CustomerListViewModel> Handle(GetCustomersListQuery request, CancellationToken cancellationToken)
+        public async Task<CustomerListViewModel> Handle(GetCustomersListQuery request, CancellationToken cancellationToken)
         {
             // get from database
-
-            
-
-            var customerList = new List<CustomerDetailModel>() {
-                new CustomerDetailModel(){ Id = Guid.NewGuid(), Name="Sandun" },
-                new CustomerDetailModel(){ Id = Guid.NewGuid(), Name="Kumara" }
-
-            };
+            var list = await this.cqrscaDbContext.Customers.Select(o => new CustomerDetailModel {
+                   Id = o.Id,
+                   Name = o.Name,
+                   Age = o.Age
+            }).ToListAsync();
 
             var model =  new CustomerListViewModel()
             {
-                Customers = customerList
+                Customers = list
             };
 
-            return Task.FromResult(model);
+            return model;
         }
     }
 }
