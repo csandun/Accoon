@@ -1,7 +1,9 @@
-﻿using Accoon.CQRSCAApi.Application.Interfaces;
+﻿using Accoon.CQRSCAApi.Application.Infastructure.AutoMapper;
+using Accoon.CQRSCAApi.Application.Interfaces;
 using Accoon.CQRSCAApi.Application.UserCases.CreateCustomer;
 using Accoon.CQRSCLApi.Infastructure;
 using Accoon.CQRSCLApi.Persistence;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,8 +24,10 @@ namespace Accoon.CQRSCAApi
         {
             this.Configuration = configuration;
         }
-            public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
+            // register auto mapper
+            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
 
             // register db context and migration assebly
             var connectionString = Configuration.GetConnectionString("CQRSCADbContext").ToString();
@@ -44,7 +48,7 @@ namespace Accoon.CQRSCAApi
             services.AddMediatR(typeof(CreateCustomerHandler).GetTypeInfo().Assembly);
             services.AddTransient<INotificationService, NotificationService>();
 
-            
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
