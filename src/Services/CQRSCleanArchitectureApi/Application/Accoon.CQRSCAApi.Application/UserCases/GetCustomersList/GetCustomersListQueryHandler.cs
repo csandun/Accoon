@@ -1,4 +1,6 @@
 ﻿using Accoon.CQRSCAApi.Application.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,24 +15,23 @@ namespace Accoon.CQRSCAApi.Application.UserCases.GetCustomersList
     public class GetCustomersListQueryHandler : IRequestHandler<GetCustomersListQuery, CustomerListViewModel>
     {
         private readonly ICqrscaDbContext cqrscaDbContext;
+        private readonly IMapper mapper;
 
-        public GetCustomersListQueryHandler(ICqrscaDbContext cqrscaDbContext)
+        public GetCustomersListQueryHandler(ICqrscaDbContext cqrscaDbContext, IMapper mapper)
         {
             this.cqrscaDbContext = cqrscaDbContext;
+            this.mapper = mapper;
         }
 
         public async Task<CustomerListViewModel> Handle(GetCustomersListQuery request, CancellationToken cancellationToken)
         {
             // get from database
-            var list = await this.cqrscaDbContext.Customers.Select(o => new CustomerDetailModel {
-                   Id = o.Id,
-                   Name = o.Name,
-                   Age = o.Age
-            }).ToListAsync();
+            var customerList = await this.cqrscaDbContext.Customers
+                .ProjectTo<CustomerDetailModel>(this.mapper.ConfigurationProvider).ToListAsync<CustomerDetailModel>();
 
             var model =  new CustomerListViewModel()
             {
-                Customers = list
+                Customers = customerList
             };
 
             return model;
