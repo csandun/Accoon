@@ -20,7 +20,7 @@ Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.s
  - [x] Central Logging with SEQ
  - [ ] Add CorerelationId and track request
  - [x] IHttpClientFacotry -  NameType 
- - [x] Automapper 8.0
+ - [x] Automapper 8.0 - register classes from reflection and use method projectTo<>()
  - [x] Customizing automatic HTTP 400 error response and Customizing automatic 500 error response using middleware
  - [x] Pagination with custom pagination filter 
  - [x] Miniprofiler
@@ -28,3 +28,4 @@ Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.s
  - [x] api gateway with ocelot, (with authenticaiton) TODO -  Caching / Logging
  - [x] CQRS with Clean Architecture
  - [x] Mediatr with CQRS 
+ - [ ] **event sourcing and RebbitMQ**
