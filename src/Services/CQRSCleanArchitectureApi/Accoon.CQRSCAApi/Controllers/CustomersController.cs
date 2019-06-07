@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Accoon.CQRSCAApi.Application.UserCases.CreateCustomer;
+using Accoon.CQRSCAApi.Application.UserCases.GetCustomer;
 using Accoon.CQRSCAApi.Application.UserCases.GetCustomersList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -31,9 +32,9 @@ namespace Accoon.CQRSCAApi.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public IActionResult Get([FromRoute] Guid id)
+        public async Task<ActionResult<CustomerModel>> Get([FromRoute] Guid id)
         {
-            throw new NotImplementedException();
+            return Ok(await this.mediator.Send(new GetCustomerQuery() { Id = id}));
         }
 
         [Route("")]

@@ -27,7 +27,7 @@ namespace Accoon.CQRSCAApi.Application.UserCases.GetCustomersList
         {
             // get from database
             var customerList = await this.cqrscaDbContext.Customers
-                .ProjectTo<CustomerDetailModel>(this.mapper.ConfigurationProvider).ToListAsync<CustomerDetailModel>();
+                .ProjectTo<CustomerDetailModel>(this.mapper.ConfigurationProvider).ToListAsync<CustomerDetailModel>(cancellationToken);
 
             var model =  new CustomerListViewModel()
             {
