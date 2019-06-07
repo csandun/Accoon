@@ -29,3 +29,4 @@ Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.s
  - [x] CQRS with Clean Architecture
  - [x] Mediatr with CQRS 
  - [ ] **event sourcing and RebbitMQ**
+ - [ ] Distributed Caching
