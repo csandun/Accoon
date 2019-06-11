@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="MediatR" Version="7.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
@@ -17,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBusRabbitMQ\EventBusRabbitMQ.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\Application\Accoon.CQRSCAApi.Application\Accoon.CQRSCAApi.Application.csproj" />
     <ProjectReference Include="..\Infastructure\Accoon.CQRSCLApi.Infastructure\Accoon.CQRSCLApi.Infastructure.csproj" />
     <ProjectReference Include="..\Persistence\Accoon.CQRSCLApi.Persistence\Accoon.CQRSCLApi.Persistence.csproj" />
