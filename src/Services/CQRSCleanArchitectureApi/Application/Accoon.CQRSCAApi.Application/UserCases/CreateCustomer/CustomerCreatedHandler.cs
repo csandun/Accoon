@@ -23,7 +23,7 @@ namespace Accoon.CQRSCAApi.Application.UserCases.CreateCustomer
 
             this.eventBus.Publish(customerCreatedEvent);
 
-            return Task.FromResult(response);
+            return Task.CompletedTask;
 
         }
     }

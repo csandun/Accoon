@@ -136,9 +136,6 @@ namespace Accoon.CQRSCAApi
                         HostName = "localhost",// configuration["EventBusConnection"],
                         UserName="guest",
                         Password = "guest",
-
-
-
                     };
 
                     //if (!string.IsNullOrEmpty(configuration["EventBusUserName"]))
