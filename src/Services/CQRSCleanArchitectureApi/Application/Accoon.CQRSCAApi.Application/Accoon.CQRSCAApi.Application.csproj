@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\EventBus\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\..\Domin\Accoon.CQRSCLApi.Domain\Accoon.CQRSCLApi.Domain.csproj" />
   </ItemGroup>
 

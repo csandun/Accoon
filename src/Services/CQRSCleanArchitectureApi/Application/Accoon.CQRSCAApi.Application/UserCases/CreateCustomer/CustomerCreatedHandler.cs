@@ -1,4 +1,5 @@
-﻿using Accoon.CQRSCAApi.Application.Interfaces;
+﻿using Accoon.BuildingBlocks.EventBus.Abstractions;
+using Accoon.CQRSCAApi.Application.Interfaces;
 using Accoon.CQRSCAApi.Application.Notification.Model;
 using MediatR;
 using System;
@@ -11,14 +12,19 @@ namespace Accoon.CQRSCAApi.Application.UserCases.CreateCustomer
 {
     public class CustomerCreatedHandler : INotificationHandler<CustomerCreated>
     {
-        private readonly INotificationService notificationService;
-        public CustomerCreatedHandler(INotificationService notificationService)
+        private readonly IEventBus eventBus;
+        public CustomerCreatedHandler(IEventBus eventBus)
         {
-            this.notificationService = notificationService;
+            this.eventBus = eventBus;
         }
-        public async Task Handle(CustomerCreated notification, CancellationToken cancellationToken)
+        public Task Handle(CustomerCreated response, CancellationToken cancellationToken)
         {
-            await this.notificationService.SendAsync(new Message() { Body = notification.CustomerId.ToString()});
+            var customerCreatedEvent = new CustomerCreatedIntegrationEvent(response.CustomerId);
+
+            this.eventBus.Publish(customerCreatedEvent);
+
+            return Task.CompletedTask;
+
         }
     }
 }

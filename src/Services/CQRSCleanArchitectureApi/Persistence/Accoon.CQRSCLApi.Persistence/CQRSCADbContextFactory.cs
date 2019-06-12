@@ -14,7 +14,7 @@ namespace Accoon.CQRSCLApi.Persistence
     {
         public CQRSCADbContextFactory()
         {
-            //Debugger.Launch();
+            Debugger.Launch();
         }
 
         public CqrscaDbContext CreateDbContext(string[] args)
