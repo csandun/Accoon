@@ -28,5 +28,5 @@ Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.s
  - [x] api gateway with ocelot, (with authenticaiton) TODO -  Caching / Logging
  - [x] CQRS with Clean Architecture
  - [x] Mediatr with CQRS 
- - [ ] **event sourcing and RebbitMQ**
+ - [x] **event sourcing and RebbitMQ**
  - [ ] Distributed Caching
