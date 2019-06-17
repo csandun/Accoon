@@ -22,7 +22,7 @@ namespace Accoon.BuildingBlocks.Common.Infastructure
                 try
                 {
                     // call migrations and seeding methods
-                    InvokeSeeder(seeder, context, services);
+                    //InvokeSeeder(seeder, context, services);
                 }
                 catch (Exception ex)
                 {

@@ -31,7 +31,7 @@ namespace Accoon.CQRSCAApi.Application.UserCases.CreateCustomer
             //insert customer to database
             this.cqrscaDbContext.Customers.Add(entity);
 
-            await this.cqrscaDbContext.SaveChangesAsync(cancellationToken);
+            //await this.cqrscaDbContext.SaveChangesAsync(cancellationToken);
 
             var newcustomer = new CustomerCreated { CustomerId = entity.Id };
             await this.mediator.Publish(newcustomer, cancellationToken);
