@@ -22,7 +22,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Data.Common;
 using System.Reflection;
-
+using FluentValidation.AspNetCore;
 
 namespace Accoon.CQRSCAApi
 {
@@ -47,7 +47,14 @@ namespace Accoon.CQRSCAApi
             services.AddTransient<ICqrscaDbContext, CqrscaDbContext>();
 
             // add mvc             
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2)
+                // fluent validation
+                .AddFluentValidation(
+                fv =>
+                {
+                    fv.RegisterValidatorsFromAssemblyContaining<CreateCustomerCommandValidator>();
+                    fv.ImplicitlyValidateChildProperties = true;
+                });
 
             // swagger 
             services.AddSwaggerGen(c =>
