@@ -83,6 +83,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus", "src\BuildingBlo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBusRabbitMQ", "src\BuildingBlocks\EventBus\EventBusRabbitMQ\EventBusRabbitMQ.csproj", "{959E25AF-600E-44FE-9479-02C2AD877E8C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{24920E64-F7DB-41FB-A1C3-9E121574C5D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accoon.BuildingBlocks.Tests", "tests\Accoon.BuildingBlocks.Tests\Accoon.BuildingBlocks.Tests.csproj", "{7D4BADAB-4669-4786-BB3C-A1EE4C3C7B91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +173,10 @@ Global
 		{959E25AF-600E-44FE-9479-02C2AD877E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{959E25AF-600E-44FE-9479-02C2AD877E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{959E25AF-600E-44FE-9479-02C2AD877E8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4BADAB-4669-4786-BB3C-A1EE4C3C7B91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4BADAB-4669-4786-BB3C-A1EE4C3C7B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4BADAB-4669-4786-BB3C-A1EE4C3C7B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4BADAB-4669-4786-BB3C-A1EE4C3C7B91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -207,6 +215,7 @@ Global
 		{7E56DBF1-51F2-4802-BCBD-F98B63BC2731} = {DA44292D-A960-414C-8079-88D524EA85E2}
 		{C7E1C594-B95F-474E-A5FB-75BC5D8ED03B} = {3F4D3454-1402-463F-9101-31A5B661A248}
 		{959E25AF-600E-44FE-9479-02C2AD877E8C} = {3F4D3454-1402-463F-9101-31A5B661A248}
+		{7D4BADAB-4669-4786-BB3C-A1EE4C3C7B91} = {24920E64-F7DB-41FB-A1C3-9E121574C5D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCFA0C45-859D-404B-9B33-A36D1340E828}

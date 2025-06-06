@@ -15,8 +15,8 @@ Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.s
  - [x] Swagger
  - [x] Serilog 
  - [x] Circute breakers and retry patterns with polly and IHTTPClientFactory (Not adding to source)
- - [ ] Unit testing
- - [ ] Functional testing
+- [ ] Unit testing
+- [ ] Functional testing
  - [x] Central Logging with SEQ
  - [ ] Add CorerelationId and track request
  - [x] IHttpClientFacotry -  NameType 
@@ -28,5 +28,13 @@ Travis Build - [![Build Status](https://travis-ci.org/ChathurangaSandun/Accoon.s
  - [x] api gateway with ocelot, (with authenticaiton) TODO -  Caching / Logging
  - [x] CQRS with Clean Architecture
  - [x] Mediatr with CQRS 
- - [x] **event sourcing and RebbitMQ**
- - [ ] Distributed Caching
+- [x] **event sourcing and RebbitMQ**
+- [ ] Distributed Caching
+
+## Running Tests
+
+Run the unit tests with the following command:
+
+```bash
+dotnet test tests/Accoon.BuildingBlocks.Tests/Accoon.BuildingBlocks.Tests.csproj
+```
